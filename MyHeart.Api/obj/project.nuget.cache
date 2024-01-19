@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "IYe1NyEdYWk1/ZOyWyRyeT0gBFEeIbuSxHjLwF3dVM7aKm/RZQ+YwTe6J4ovtvTQOL+dRUhMtra12j2GzyL7cw==",
+  "success": true,
+  "projectFilePath": "D:\\Simple\\MyHeart.Api\\MyHeart.Api\\MyHeart.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\hoangbt\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512"
+  ],
+  "logs": []
+}

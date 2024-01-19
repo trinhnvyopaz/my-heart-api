@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = MyHeart.Services
+build_property.ProjectDir = D:\Simple\MyHeart.Api\MyHeart.Services\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
