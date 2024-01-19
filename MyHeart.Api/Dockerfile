@@ -8,7 +8,7 @@ FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["MyHeart.Api/MyHeart.Api.csproj", "MyHeart.Api/"]
-COPY ["MyHeart.Services/MyHeart.Services.csproj", "MyHeart.Services/"]
+#COPY ["MyHeart.Services/MyHeart.Services.csproj", "MyHeart.Services/"]
 RUN dotnet restore "./MyHeart.Api/./MyHeart.Api.csproj"
 COPY . .
 WORKDIR "/src/MyHeart.Api"
