@@ -20,6 +20,7 @@ namespace MyHeart.Api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseUrls("http://0.0.0.0:6000");
                     webBuilder.UseStartup<Startup>();
                 });
     }
