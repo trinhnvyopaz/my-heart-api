@@ -2,17 +2,17 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
 WORKDIR /app
-EXPOSE 80
+EXPOSE 6000
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["MyHeart.Api/MyHeart.Api.csproj", "MyHeart.Api/"]
+COPY ["MyHeart.Api.csproj", "MyHeart.Api/"]
 #COPY ["MyHeart.Services/MyHeart.Services.csproj", "MyHeart.Services/"]
 RUN dotnet restore "./MyHeart.Api/./MyHeart.Api.csproj"
 COPY . .
-WORKDIR "/src/MyHeart.Api"
-RUN dotnet build "./MyHeart.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+# WORKDIR "/src/MyHeart.Api"
+# RUN dotnet build "./MyHeart.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
