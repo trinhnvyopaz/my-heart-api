@@ -1,0 +1,74 @@
+﻿<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    x:Class="MyHeart.MobileApp.Views.PopUp.PhysicalActivityPopUp"
+    xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels"
+    xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+    xmlns:dto="clr-namespace:MyHeart.DTO.User;assembly=MyHeart.DTO"
+    xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls" 
+    xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters">
+    <!--You can set an animation in the xaml file or in the csharp code behind-->
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+    <pages:PopupPage.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+        <converters:EqualityToBoolConverter x:Key="EqualityToBoolConverter" />
+    </pages:PopupPage.Resources>
+    <!--You can use any elements here which are extended from Xamarin.Forms.View-->
+    <Frame BackgroundColor="{StaticResource BackgroundColor}"
+           HasShadow="False"
+           VerticalOptions="Center" 
+           HorizontalOptions="Center"
+           HeightRequest="490"
+           CornerRadius="10"
+           WidthRequest="358"
+           Margin="8,0">
+        <Grid RowDefinitions="Auto, *,Auto" ColumnDefinitions=".8*,.2*">
+            <Label Grid.Row="0" Text="{Binding Title}" FontSize="Title" Style="{StaticResource HeaderLabelStyle}" />
+            <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource CloseButton}" Command="{Binding GoBackCommand}" />
+
+            <StackLayout VerticalOptions="CenterAndExpand" Grid.Row="1" Grid.ColumnSpan="2">
+                <controls:AnswerItemView EnableTwoWayMode="False" IsChecked="{Binding SelectedValue, Converter={StaticResource EqualityToBoolConverter}, ConverterParameter={x:Static dto:PhysicalActivityFrequencyType.None}, Mode=OneWay}" Title="Žádná" >
+                    <controls:AnswerItemView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangeSelectionCommand}" CommandParameter="{x:Static dto:PhysicalActivityFrequencyType.None}" />
+                    </controls:AnswerItemView.GestureRecognizers>
+                </controls:AnswerItemView>
+                <controls:AnswerItemView EnableTwoWayMode="False" IsChecked="{Binding SelectedValue, Converter={StaticResource EqualityToBoolConverter}, ConverterParameter={x:Static dto:PhysicalActivityFrequencyType.Once}, Mode=OneWay}"  Title="1x týdně" >
+                    <controls:AnswerItemView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangeSelectionCommand}" CommandParameter="{x:Static dto:PhysicalActivityFrequencyType.Once}" />
+                    </controls:AnswerItemView.GestureRecognizers>
+                </controls:AnswerItemView>
+                <controls:AnswerItemView EnableTwoWayMode="False" IsChecked="{Binding SelectedValue, Converter={StaticResource EqualityToBoolConverter}, ConverterParameter={x:Static dto:PhysicalActivityFrequencyType.Twice}, Mode=OneWay}"  Title="2x týdně" >
+                    <controls:AnswerItemView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangeSelectionCommand}" CommandParameter="{x:Static dto:PhysicalActivityFrequencyType.Twice}" />
+                    </controls:AnswerItemView.GestureRecognizers>
+                </controls:AnswerItemView>
+                <controls:AnswerItemView EnableTwoWayMode="False" IsChecked="{Binding SelectedValue, Converter={StaticResource EqualityToBoolConverter}, ConverterParameter={x:Static dto:PhysicalActivityFrequencyType.FourTimes}, Mode=OneWay}"  Title="4x týdně" >
+                    <controls:AnswerItemView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangeSelectionCommand}" CommandParameter="{x:Static dto:PhysicalActivityFrequencyType.FourTimes}" />
+                    </controls:AnswerItemView.GestureRecognizers>
+                </controls:AnswerItemView>
+                <controls:AnswerItemView EnableTwoWayMode="False" IsChecked="{Binding SelectedValue, Converter={StaticResource EqualityToBoolConverter}, ConverterParameter={x:Static dto:PhysicalActivityFrequencyType.SixTimes}, Mode=OneWay}"  Title="6x týdně" >
+                    <controls:AnswerItemView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangeSelectionCommand}" CommandParameter="{x:Static dto:PhysicalActivityFrequencyType.SixTimes}" />
+                    </controls:AnswerItemView.GestureRecognizers>
+                </controls:AnswerItemView>
+            </StackLayout>
+           
+
+            <Button Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" WidthRequest="170" Style="{StaticResource ActionButton}" Command="{Binding SaveCommand}" Text="Uložit" />
+        </Grid>
+    </Frame>
+</pages:PopupPage>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:view="clr-namespace:MyHeart.MobileApp.Views"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             NavigationPage.HasNavigationBar="False"
+             x:DataType="{x:Type vm:RecomandationsViewModel}"
+             xmlns:c="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             xmlns:sel="clr-namespace:MyHeart.MobileApp.Utils.TemplateSelectors"
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             xmlns:dto="clr-namespace:MyHeart.DTO.ProfessionalInformation;assembly=MyHeart.DTO"
+             x:Class="MyHeart.MobileApp.Views.RecomandationsPage">
+
+    <Grid RowDefinitions="Auto, Auto, *">
+        <controls:MainHeaderView Title="Doporučení" />
+        <controls:SearchBarView Margin="8" Grid.Row="1" SearchQuery="{Binding SearchQuery}"  />
+        <CollectionView Margin="8" Grid.Row="2" ItemsSource="{Binding Recommandations}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type x:String}">
+                    <Frame Style="{StaticResource DetailCardView}">
+                        <controls:AutoHeigthWebView>
+                            <controls:AutoHeigthWebView.Source>
+                                <HtmlWebViewSource Html="{Binding .}" />
+                            </controls:AutoHeigthWebView.Source>
+                        </controls:AutoHeigthWebView>
+                    </Frame>
+                
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

@@ -1,9 +1,0 @@
-D:\Simple\MyHeart.Api\MyHeart.Services\bin\Debug\netcoreapp3.1\MyHeart.Services.deps.json
-D:\Simple\MyHeart.Api\MyHeart.Services\bin\Debug\netcoreapp3.1\MyHeart.Services.dll
-D:\Simple\MyHeart.Api\MyHeart.Services\bin\Debug\netcoreapp3.1\MyHeart.Services.pdb
-D:\Simple\MyHeart.Api\MyHeart.Services\obj\Debug\netcoreapp3.1\MyHeart.Services.GeneratedMSBuildEditorConfig.editorconfig
-D:\Simple\MyHeart.Api\MyHeart.Services\obj\Debug\netcoreapp3.1\MyHeart.Services.AssemblyInfoInputs.cache
-D:\Simple\MyHeart.Api\MyHeart.Services\obj\Debug\netcoreapp3.1\MyHeart.Services.AssemblyInfo.cs
-D:\Simple\MyHeart.Api\MyHeart.Services\obj\Debug\netcoreapp3.1\MyHeart.Services.csproj.CoreCompileInputs.cache
-D:\Simple\MyHeart.Api\MyHeart.Services\obj\Debug\netcoreapp3.1\MyHeart.Services.dll
-D:\Simple\MyHeart.Api\MyHeart.Services\obj\Debug\netcoreapp3.1\MyHeart.Services.pdb

@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.PopUp.PersonalAnamnesisDetailView"
+             xmlns:dxc="http://schemas.devexpress.com/xamarin/2014/forms/charts" 
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views.PopUp" 
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers">
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="RadioButtonTemplate">
+            <Frame Style="{StaticResource DetailCardView}" HasShadow="False" BackgroundColor="Transparent" 
+                   Padding="0" Margin="0" BorderColor="Transparent" x:Name="MainLayout" HeightRequest="30">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="MainLayout"
+                                            Property="BackgroundColor"
+                                            Value="{StaticResource SecondaryColor}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="MainLayout"
+                                            Property="BackgroundColor"
+                                            Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+
+                <ContentPresenter HorizontalOptions="CenterAndExpand" />
+            </Frame>
+        </ControlTemplate>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="ControlTemplate" Value="{StaticResource RadioButtonTemplate}" />
+            <Setter Property="TextColor" Value="{StaticResource MediumGreyFont}" />
+            <Setter Property="FontFamily" Value="{StaticResource NunitoBoldFont}" />
+            <Setter Property="FontSize" Value="14" />
+            <Style.Triggers>
+                <DataTrigger  TargetType="{x:Type RadioButton}" Binding="{Binding Path=IsChecked, Source={RelativeSource Self}}" Value="True">
+                    <Setter Property="TextColor" Value="White"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type Label}" x:Key="ValueLabelStyle">
+            <Setter Property="TextColor" Value="{StaticResource DarkFontColor}" />
+            <Setter Property="FontFamily" Value="{StaticResource NunitoBoldFont}" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+        </Style>
+        <Style TargetType="{x:Type Label}" x:Key="DateLabelStyle" BasedOn="{StaticResource ValidationLabelStyle}">
+            <Setter Property="FontFamily" Value="{StaticResource NunitoRegularFont}"/>
+            <Setter Property="TextColor" Value="{StaticResource DarkFontColor}" />
+        </Style>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+            <Grid IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" RowDefinitions="Auto, Auto, *, Auto, *, Auto">
+                <controls:TitleHeader ActionCommand="{Binding GoBackCommand}" Title="{Binding Title}"/>
+                <Frame Margin="8,0" Padding="0" BackgroundColor="White" Style="{StaticResource DetailCardView}" Grid.Row="1">
+                    <Grid RadioButtonGroup.GroupName="TimeFramGroup" RadioButtonGroup.SelectedValue="{Binding CurrentChartTimeFrame}">
+                        <RadioButton Grid.Column="0" Content="Dny" Value="{x:Static dxc:DateTimeMeasureUnit.Day}" />
+                        <RadioButton Grid.Column="1" Content="Týdny" Value="{x:Static dxc:DateTimeMeasureUnit.Week}" />
+                        <RadioButton Grid.Column="2" Content="Měsíce" Value="{x:Static dxc:DateTimeMeasureUnit.Month}"/>
+                        <RadioButton Grid.Column="3" Content="Roky" Value="{x:Static dxc:DateTimeMeasureUnit.Year}"/>
+                    </Grid>
+                </Frame>
+
+                <dxc:ChartView AxisMaxZoomPercent="10000" ScrollIndicatorsEnabled="False" Grid.Row="2" AxisXNavigationMode="ScrollingAndZooming" AxisYNavigationMode="ScrollingAndZooming">
+                    <dxc:ChartView.ChartStyle>
+                        <dxc:ChartStyle BackgroundColor="{StaticResource BackgroundColor}" />
+                    </dxc:ChartView.ChartStyle>
+                    <dxc:ChartView.Series>
+                        <dxc:AreaSeries>
+                            <dxc:AreaSeries.Style>
+                                <dxc:AreaSeriesStyle StrokeThickness="5" Fill="{StaticResource SecondaryColor}">
+                                    <dxc:AreaSeriesStyle.FillEffect>
+                                        <dxc:TransparencyGradient BaselineAlpha="0" SeriesLineAlpha="0.2" />
+                                    </dxc:AreaSeriesStyle.FillEffect>
+                                </dxc:AreaSeriesStyle>
+                            </dxc:AreaSeries.Style>
+                            <dxc:AreaSeries.Data>
+                                <dxc:SeriesDataAdapter DataSource="{Binding FirstLineValues}" ArgumentDataMember="Date">
+                                    <dxc:ValueDataMember Type="Value" Member="Value" />
+                                </dxc:SeriesDataAdapter>
+                            </dxc:AreaSeries.Data>
+                        </dxc:AreaSeries>
+                        <dxc:AreaSeries>
+                            <dxc:AreaSeries.Style>
+                                <dxc:AreaSeriesStyle StrokeThickness="5" Fill="{StaticResource MainColor}">
+                                    <dxc:AreaSeriesStyle.FillEffect>
+                                        <dxc:TransparencyGradient BaselineAlpha="0" SeriesLineAlpha="0.2" />
+                                    </dxc:AreaSeriesStyle.FillEffect>
+                                </dxc:AreaSeriesStyle>
+                            </dxc:AreaSeries.Style>
+                            <dxc:AreaSeries.Data>
+                                <dxc:SeriesDataAdapter DataSource="{Binding SecondLineValues}" ArgumentDataMember="Date">
+                                    <dxc:ValueDataMember Type="Value" Member="Value" />
+                                </dxc:SeriesDataAdapter>
+                            </dxc:AreaSeries.Data>
+                        </dxc:AreaSeries>
+                    </dxc:ChartView.Series>
+                    <dxc:ChartView.AxisX>
+                        <dxc:DateTimeAxisX MeasureUnit="{Binding CurrentChartTimeFrame}" GridAlignment="{Binding CurrentChartTimeFrame}" GridSpacing="1">
+                            <dxc:DateTimeAxisX.Style >
+                                <dxc:AxisStyle MajorGridlinesVisible="True" />
+                            </dxc:DateTimeAxisX.Style>
+                            <dxc:DateTimeAxisX.LabelTextFormatter>
+                                <local:AxisLabelFormatter MeasureUnit="{Binding CurrentChartTimeFrame}"/>
+                            </dxc:DateTimeAxisX.LabelTextFormatter>
+                            <dxc:DateTimeAxisX.Range >
+                                <dxc:DateTimeRange Min="{Binding DateTimeAxisMin}" VisualMin="{Binding DateTimeAxisVisualMin}"
+                                                   Max="{Binding DateTimeAxisMax}" VisualMax="{Binding DateTimeAxisVisualMax}" />
+                            </dxc:DateTimeAxisX.Range>
+                            <dxc:DateTimeAxisX.Label>
+                                <dxc:AxisLabel>
+                                    <dxc:AxisLabel.ResolveOverlappingOptions>
+                                        <dxc:AxisLabelResolveOverlappingOptions AllowHide="True"/>
+                                    </dxc:AxisLabel.ResolveOverlappingOptions>
+                                    <dxc:AxisLabel.Style>
+                                        <dxc:AxisLabelStyle>
+                                            <dxc:AxisLabelStyle.TextStyle>
+                                                <dxc:TextStyle Color="{StaticResource MediumGreyFont}" Size="16"/>
+                                            </dxc:AxisLabelStyle.TextStyle>
+                                        </dxc:AxisLabelStyle>
+                                    </dxc:AxisLabel.Style>
+                                </dxc:AxisLabel>
+                            </dxc:DateTimeAxisX.Label>
+                        </dxc:DateTimeAxisX>
+                    </dxc:ChartView.AxisX>
+                    <dxc:ChartView.AxisY>
+                        <dxc:NumericAxisY AlwaysShowZeroLevel="False">
+                            <dxc:NumericAxisY.Label>
+                                <dxc:AxisLabel>
+                                    <dxc:AxisLabel.Style>
+                                        <dxc:AxisLabelStyle>
+                                            <dxc:AxisLabelStyle.TextStyle>
+                                                <dxc:TextStyle Color="{StaticResource MediumGreyFont}" Size="16"/>
+                                            </dxc:AxisLabelStyle.TextStyle>
+                                        </dxc:AxisLabelStyle>
+                                    </dxc:AxisLabel.Style>
+                                </dxc:AxisLabel>
+                            </dxc:NumericAxisY.Label>
+                            <dxc:NumericAxisY.Range>
+                                <dxc:NumericRange SideMargin="5" Min="{Binding ChartMinY}" Max="{Binding ChartMaxY}"/>
+                            </dxc:NumericAxisY.Range>
+                        </dxc:NumericAxisY>
+                    </dxc:ChartView.AxisY>
+                </dxc:ChartView>
+
+                <Label Grid.Row="3" Margin="25,0,0,0" TextColor="{StaticResource RegulatFontColor}" Text="{Binding Title}" FontSize="14" FontFamily="{StaticResource NunitoRegularFont}" />
+
+                <CollectionView Margin="8,8,8,0" Grid.Row="4" ItemsSource="{Binding Items}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Style="{StaticResource DetailCardView}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.EditItemCommand, Source={RelativeSource AncestorType={x:Type local:PersonalAnamnesisDetailView}}}" CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                                <Grid ColumnDefinitions="*,*, Auto">
+                                    <StackLayout Grid.Column="0" Orientation="Horizontal">
+                                        <Label Style="{StaticResource ValueLabelStyle}" Text="{Binding IsPersonal_Value}"/>
+                                        <Label Style="{StaticResource ValueLabelStyle}" Text="{Binding BindingContext.ValueSuffix, Source={RelativeSource AncestorType={x:Type local:PersonalAnamnesisDetailView}}}"/>
+                                    </StackLayout>
+                                    <Label Style="{StaticResource DateLabelStyle}" Grid.Column="1" HorizontalOptions="EndAndExpand" Text="{Binding IsPersonal_Date, StringFormat='{0:dd.MM.yyyy, hh:mm}'}"/>
+                                    <ImageButton Grid.Column="2" WidthRequest="11" HeightRequest="18" BackgroundColor="Transparent"  Source="rightarrow.png" />
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <ImageButton Style="{StaticResource AddCircleButton}" Command="{Binding CreateItemCommand}" Grid.Row="5" />
+
+            </Grid>
+        </StackLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>

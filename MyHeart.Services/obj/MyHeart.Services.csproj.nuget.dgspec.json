@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Simple\\MyHeart.Api\\MyHeart.Services\\MyHeart.Services.csproj": {}
+    "D:\\MyHeart\\my_heart_advice\\MyHeart.Services\\MyHeart.Services.csproj": {}
   },
   "projects": {
-    "D:\\Simple\\MyHeart.Api\\MyHeart.Services\\MyHeart.Services.csproj": {
+    "D:\\MyHeart\\my_heart_advice\\MyHeart.Data\\MyHeart.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Simple\\MyHeart.Api\\MyHeart.Services\\MyHeart.Services.csproj",
-        "projectName": "MyHeart.Services",
-        "projectPath": "D:\\Simple\\MyHeart.Api\\MyHeart.Services\\MyHeart.Services.csproj",
+        "projectUniqueName": "D:\\MyHeart\\my_heart_advice\\MyHeart.Data\\MyHeart.Data.csproj",
+        "projectName": "MyHeart.Data",
+        "projectPath": "D:\\MyHeart\\my_heart_advice\\MyHeart.Data\\MyHeart.Data.csproj",
         "packagesPath": "C:\\Users\\hoangbt\\.nuget\\packages\\",
-        "outputPath": "D:\\Simple\\MyHeart.Api\\MyHeart.Services\\obj\\",
+        "outputPath": "D:\\MyHeart\\my_heart_advice\\MyHeart.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,7 +32,14 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\MyHeart\\my_heart_advice\\MyHeart.Core\\MyHeart.Core.csproj": {
+                "projectPath": "D:\\MyHeart\\my_heart_advice\\MyHeart.Core\\MyHeart.Core.csproj"
+              },
+              "D:\\MyHeart\\my_heart_advice\\MyHeart.DTO\\MyHeart.DTO.csproj": {
+                "projectPath": "D:\\MyHeart\\my_heart_advice\\MyHeart.DTO\\MyHeart.DTO.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -44,6 +51,34 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "EFCore.BulkExtensions": {
+              "target": "Package",
+              "version": "[3.6.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Twilio": {
+              "target": "Package",
+              "version": "[6.13.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -60,7 +95,238 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\MyHeart\\my_heart_advice\\MyHeart.DTO\\MyHeart.DTO.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MyHeart\\my_heart_advice\\MyHeart.DTO\\MyHeart.DTO.csproj",
+        "projectName": "MyHeart.DTO",
+        "projectPath": "D:\\MyHeart\\my_heart_advice\\MyHeart.DTO\\MyHeart.DTO.csproj",
+        "packagesPath": "C:\\Users\\hoangbt\\.nuget\\packages\\",
+        "outputPath": "D:\\MyHeart\\my_heart_advice\\MyHeart.DTO\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\hoangbt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "Plugin.Permissions": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\MyHeart\\my_heart_advice\\MyHeart.Services\\MyHeart.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MyHeart\\my_heart_advice\\MyHeart.Services\\MyHeart.Services.csproj",
+        "projectName": "MyHeart.Services",
+        "projectPath": "D:\\MyHeart\\my_heart_advice\\MyHeart.Services\\MyHeart.Services.csproj",
+        "packagesPath": "C:\\Users\\hoangbt\\.nuget\\packages\\",
+        "outputPath": "D:\\MyHeart\\my_heart_advice\\MyHeart.Services\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\hoangbt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\MyHeart\\my_heart_advice\\MyHeart.Core\\MyHeart.Core.csproj": {
+                "projectPath": "D:\\MyHeart\\my_heart_advice\\MyHeart.Core\\MyHeart.Core.csproj"
+              },
+              "D:\\MyHeart\\my_heart_advice\\MyHeart.Data\\MyHeart.Data.csproj": {
+                "projectPath": "D:\\MyHeart\\my_heart_advice\\MyHeart.Data\\MyHeart.Data.csproj"
+              },
+              "D:\\MyHeart\\my_heart_advice\\MyHeart.DTO\\MyHeart.DTO.csproj": {
+                "projectPath": "D:\\MyHeart\\my_heart_advice\\MyHeart.DTO\\MyHeart.DTO.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Azure.Storage.Blobs": {
+              "target": "Package",
+              "version": "[12.8.0, )"
+            },
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[19.0.0, )"
+            },
+            "DinkToPdf": {
+              "target": "Package",
+              "version": "[1.0.8, )"
+            },
+            "EFCore.BulkExtensions": {
+              "target": "Package",
+              "version": "[3.6.1, )"
+            },
+            "EPPlus": {
+              "target": "Package",
+              "version": "[4.5.3.3, )"
+            },
+            "FirebaseAdmin": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
+            "Handlebars.Net": {
+              "target": "Package",
+              "version": "[2.1.2, )"
+            },
+            "HtmlAgilityPack": {
+              "target": "Package",
+              "version": "[1.11.28, )"
+            },
+            "HtmlSanitizer": {
+              "target": "Package",
+              "version": "[5.0.376, )"
+            },
+            "Isopoh.Cryptography.Argon2": {
+              "target": "Package",
+              "version": "[1.1.10, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.6.0, )"
+            },
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.4.1, )"
+            },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[106.11.7, )"
+            },
+            "Stripe.net": {
+              "target": "Package",
+              "version": "[41.11.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.19.0, )"
+            },
+            "System.Text.Encoding.CodePages": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "TwoFactorAuth.Net": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
+            "morelinq": {
+              "target": "Package",
+              "version": "[3.3.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

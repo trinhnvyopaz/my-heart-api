@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.MyAnamnesis.AnamnesisCardView"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views.MyAnamnesis"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             ios:Page.UseSafeArea="True">
+    <ContentView.Resources>
+        <Style TargetType="{x:Type BoxView}" x:Key="Separator">
+            <Setter Property="HeightRequest" Value="1"/>
+            <Setter Property="Color" Value="{StaticResource MediumGreyFont}"/>
+            <Setter Property="Opacity" Value="0.15"/>
+            <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+        </Style>
+        <Style TargetType="{x:Type Label}" x:Key="TitleStyle">
+            <Setter Property="FontFamily" Value="{StaticResource NunitoBoldFont}"/>
+            <Setter Property="TextColor" Value="#2D2957"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+        <converters:CollectionItemIsLastConverter x:Key="CollectionItemIsLastConverter" />
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Frame Padding="0" Style="{StaticResource CardStyle}">
+            <StackLayout Spacing="8">
+                <Grid Padding="16" ColumnDefinitions=".1*, .8*, .1*" HeightRequest="40">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToAddItemCommand}" />
+                    </Grid.GestureRecognizers>
+                    <Frame BackgroundColor="White" HorizontalOptions="StartAndExpand" WidthRequest="40" CornerRadius="10" HasShadow="False" Grid.Column="0" Padding="4" >
+                        <Image x:Name="IconImage" Source="healthcare.png"/>
+                    </Frame>
+                    <Label VerticalTextAlignment="Center" Grid.Column="1" Style="{StaticResource HeaderLabelStyle}" FontSize="24" FontFamily="{StaticResource NunitoRegularFont}" TextColor="{StaticResource DarkGreyFontColor}" x:Name="TitleLabel"/>
+                    <Image HeightRequest="9.15" WidthRequest="11" HorizontalOptions="EndAndExpand" Grid.Column="2" Source="rightarrow.png" />
+                </Grid>
+
+                <BoxView Margin="1,0,16,0" Style="{StaticResource Separator}" />
+
+                <StackLayout Padding="16" BindableLayout.ItemsSource="{Binding Rows}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+
+                            <Grid RowSpacing="0" RowDefinitions="Auto,Auto">
+                                <Grid Margin="0,5" ColumnDefinitions="*, Auto">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource Mode=FindAncestor,AncestorType={x:Type Frame}}}"
+                                                                  CommandParameter="{Binding Id}"/>
+                                    </Grid.GestureRecognizers>
+
+                                    <Label Grid.Column="0" HorizontalOptions="FillAndExpand" Style="{StaticResource TitleStyle}" Text="{Binding Title}"/>
+                                    <Label Grid.Column="1" HorizontalOptions="EndAndExpand" Style="{StaticResource TitleStyle}" FontSize="Subtitle" Text="{Binding Value}" />
+                                </Grid>
+                                <BoxView Style="{StaticResource Separator}" IsVisible="{Binding IsLastRow, Converter={StaticResource NegateBoolConverter}}" />
+                            </Grid>
+
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

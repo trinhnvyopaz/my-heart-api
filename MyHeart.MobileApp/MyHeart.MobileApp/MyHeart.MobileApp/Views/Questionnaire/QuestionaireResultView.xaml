@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseQuestionaireStepView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.Questionnaire.QuestionaireResultView"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views.Questionnaire"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters">
+    <local:BaseQuestionaireStepView.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+    </local:BaseQuestionaireStepView.Resources>
+    <local:BaseQuestionaireStepView.Content>
+        <Grid RowDefinitions="Auto, 3*, 2*, 1*" Margin="10">
+            <Label Text="Dle Vašich odpovědí se může jednat o některé z následujících onemocnění" FontSize="Title" Style="{StaticResource QuestionaireTitleLabelStyle}"/>
+
+            <ActivityIndicator IsVisible="{Binding IsBusy}" Grid.RowSpan="2"
+                               IsRunning="True" HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"/>
+
+            <local:DiseasesResultView IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" Items="{Binding QuestionairedResult.ProbableDiseases}" 
+                                      FrameColor="#EA4444" Title="Pravděpodobné" Grid.Row="1" FrameBorderColor="#EA4444" FontSize="40" />
+            <local:DiseasesResultView IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" Items="{Binding QuestionairedResult.PossibleDiseases}" 
+                                      FrameColor="#E89595" Title="Možné" Grid.Row="2" FrameBorderColor="#E89595" FontSize="34"/>
+            <local:DiseasesResultView IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" Items="{Binding QuestionairedResult.ImprobableDiseases}" 
+                                      FrameColor="#E89595" FrameBorderColor="#E89595" Title="Nepravděpodobné" Grid.Row="3" FontSize="34"/>
+
+        </Grid>
+    </local:BaseQuestionaireStepView.Content>
+</local:BaseQuestionaireStepView>

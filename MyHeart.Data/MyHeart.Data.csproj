@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200417115514_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200417115514_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200429132430_SicknessToDisease.cs" />
+    <Compile Remove="Migrations\20200429132430_SicknessToDisease.Designer.cs" />
+    <Compile Remove="Migrations\20200505142716_UserQuestions.cs" />
+    <Compile Remove="Migrations\20200505142716_UserQuestions.Designer.cs" />
+    <Compile Remove="Migrations\20200505143018_UserQuestionsFix.cs" />
+    <Compile Remove="Migrations\20200505143018_UserQuestionsFix.Designer.cs" />
+    <Compile Remove="Migrations\20200505153307_UserQuestionsDone.cs" />
+    <Compile Remove="Migrations\20200505153307_UserQuestionsDone.Designer.cs" />
+    <Compile Remove="Migrations\20200505154834_UserQuestionsRemake.cs" />
+    <Compile Remove="Migrations\20200505154834_UserQuestionsRemake.Designer.cs" />
+    <Compile Remove="Migrations\20200506111838_UserDetail.cs" />
+    <Compile Remove="Migrations\20200506111838_UserDetail.Designer.cs" />
+    <Compile Remove="Migrations\20200506120700_UserDetail_v2.cs" />
+    <Compile Remove="Migrations\20200506120700_UserDetail_v2.Designer.cs" />
+    <Compile Remove="Migrations\20200506154256_UserDetail_v4.cs" />
+    <Compile Remove="Migrations\20200506154256_UserDetail_v4.Designer.cs" />
+    <Compile Remove="Migrations\20200512162651_update_User_table.cs" />
+    <Compile Remove="Migrations\20200512162651_update_User_table.Designer.cs" />
+    <Compile Remove="Migrations\20200512164540_update_User_table2.cs" />
+    <Compile Remove="Migrations\20200512164540_update_User_table2.Designer.cs" />
+    <Compile Remove="Migrations\20200514153545_doctorDetail.cs" />
+    <Compile Remove="Migrations\20200514153545_doctorDetail.Designer.cs" />
+    <Compile Remove="Migrations\20200525161548_vazby.cs" />
+    <Compile Remove="Migrations\20200525161548_vazby.Designer.cs" />
+    <Compile Remove="Migrations\20200525161911_init.cs" />
+    <Compile Remove="Migrations\20200525161911_init.Designer.cs" />
+    <Compile Remove="Migrations\20200603123342_remakeBond.cs" />
+    <Compile Remove="Migrations\20200603123342_remakeBond.Designer.cs" />
+    <Compile Remove="Migrations\20200603124318_remakeBond1.cs" />
+    <Compile Remove="Migrations\20200603124318_remakeBond1.Designer.cs" />
+    <Compile Remove="Migrations\20200603135556_remakeBondDisease.cs" />
+    <Compile Remove="Migrations\20200603135556_remakeBondDisease.Designer.cs" />
+    <Compile Remove="Migrations\20200609134436_remakeBondDisease2.cs" />
+    <Compile Remove="Migrations\20200609134436_remakeBondDisease2.Designer.cs" />
+    <Compile Remove="Migrations\20200609134823_remakeBondDisease2.cs" />
+    <Compile Remove="Migrations\20200609134823_remakeBondDisease2.Designer.cs" />
+    <Compile Remove="Migrations\20200609135027_remakeBondDisease.cs" />
+    <Compile Remove="Migrations\20200609135027_remakeBondDisease.Designer.cs" />
+    <Compile Remove="Migrations\20200610100404_medicamentGroupBonds.cs" />
+    <Compile Remove="Migrations\20200610100404_medicamentGroupBonds.Designer.cs" />
+    <Compile Remove="Migrations\20200615103624_bondfinish.cs" />
+    <Compile Remove="Migrations\20200615103624_bondfinish.Designer.cs" />
+    <Compile Remove="Migrations\20200715132115_primaryKeysForBonds.cs" />
+    <Compile Remove="Migrations\20200715132115_primaryKeysForBonds.Designer.cs" />
+    <Compile Remove="Migrations\20200715134652_primaryKeys.cs" />
+    <Compile Remove="Migrations\20200715134652_primaryKeys.Designer.cs" />
+    <Compile Remove="Migrations\20200724102930_symptomQuestion.cs" />
+    <Compile Remove="Migrations\20200724102930_symptomQuestion.Designer.cs" />
+    <Compile Remove="Migrations\20200724113300_symptomQuestion.cs" />
+    <Compile Remove="Migrations\20200724113300_symptomQuestion.Designer.cs" />
+    <Compile Remove="Migrations\20200811111611_clientTables.cs" />
+    <Compile Remove="Migrations\20200811111611_clientTables.Designer.cs" />
+    <Compile Remove="Migrations\20201125142926_therpay-news-update-date-and-user.cs" />
+    <Compile Remove="Migrations\20201125142926_therpay-news-update-date-and-user.Designer.cs" />
+    <Compile Remove="Migrations\20201113140324_UserReportMigration.cs" />
+    <Compile Remove="Migrations\20201113140324_UserReportMigration.Designer.cs" />
+    <Compile Remove="Migrations\20201208080500_AddedLastUpdateInfo.cs" />
+    <Compile Remove="Migrations\20201208080500_AddedLastUpdateInfo.Designer.cs" />
+    <Compile Remove="Migrations\20201209165830_Report_AddCreationAndType.cs" />
+    <Compile Remove="Migrations\20201209165830_Report_AddCreationAndType.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EFCore.BulkExtensions" Version="3.6.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Twilio" Version="6.13.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyHeart.Core\MyHeart.Core.csproj" />
+    <ProjectReference Include="..\MyHeart.DTO\MyHeart.DTO.csproj" />
+  </ItemGroup>
+</Project>

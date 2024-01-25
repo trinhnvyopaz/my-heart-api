@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             x:Class="MyHeart.MobileApp.Views.Controls.MainHeaderView"
+             BackgroundColor="Transparent">
+    <ContentView.Resources>
+        <Style TargetType="{x:Type Label}" x:Key="Title">
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="FontFamily" Value="{StaticResource NunitoExtraBoldFont}"/>
+            <Setter Property="TextColor" Value="{StaticResource DarkFontColor}"/>
+            <Setter Property="HeightRequest" Value="35"/>
+        </Style>
+        <Style TargetType="{x:Type Label}" x:Key="Subtitle">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="{StaticResource NunitoSemiBoldFont}"/>
+            <Setter Property="TextColor" Value="{StaticResource GreyFontColor}"/>
+            <Setter Property="HeightRequest" Value="22"/>
+        </Style>
+        <Style TargetType="{x:Type Label}" x:Key="Date">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="{StaticResource NunitoRegularFont}"/>
+            <Setter Property="TextColor" Value="{StaticResource GreyFontColor}"/>
+            <Setter Property="HeightRequest" Value="19"/>
+        </Style>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid Margin="8, 5" RowSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".6*"/>
+                <ColumnDefinition Width=".1*"/>
+                <ColumnDefinition Width=".1*"/>
+                <ColumnDefinition Width=".1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="TitleLabel" Style="{StaticResource Title}" Grid.Column="0" Grid.Row="0"/>
+            <StackLayout Orientation="Horizontal" Spacing="1" Grid.Column="0" Grid.Row="1">
+                <Label x:Name="UserLabel" Style="{StaticResource Subtitle}"  />
+                <!--<Label Text="/" Style="{StaticResource Subtitle}"/>
+                <Label Text="10.10.1970" Style="{StaticResource Date}"/>-->
+            </StackLayout>
+
+            <ImageButton HorizontalOptions="End" Source="qrcode.png" HeightRequest="28" Grid.Row="0"  WidthRequest="28" Grid.Column="1" BackgroundColor="Transparent" Command="{Binding ScanQrCodeCommand}"/>
+
+            <ImageButton HorizontalOptions="End" Grid.Column="2" Grid.Row="0" Style="{StaticResource NotificationPicture}" />
+
+            <controls:ProfilePictureView Grid.Column="3" Grid.Row="0"/>
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

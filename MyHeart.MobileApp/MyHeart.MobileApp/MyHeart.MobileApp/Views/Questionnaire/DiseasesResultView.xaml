@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views.Questionnaire"
+             x:Class="MyHeart.MobileApp.Views.Questionnaire.DiseasesResultView">
+<ContentView.Content>
+        <Frame CornerRadius="10" Opacity="0.6" x:Name="MainFrame">
+            <StackLayout>
+                <Label x:Name="TitleLabel" HorizontalTextAlignment="Center" FontSize="16" TextColor="{StaticResource DarkFontColor}"/>
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" x:Name="DiseasesList" 
+                             BindableLayout.ItemsSource="{Binding Items, Source={RelativeSource AncestorType={x:Type local:DiseasesResultView}}}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Label x:Name="DiseaseLabel"  Text="{Binding Disease.Name}" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

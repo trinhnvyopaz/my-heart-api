@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.User.UserNotificationPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels.User" 
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views.User">
+    <ContentPage.BindingContext>
+        <vm:UserNotificationViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto, *">
+            <controls:TitleHeader Title="Novinky" ActionCommand="{Binding GoBackCommand}" />
+            <StackLayout Grid.Row="1" Margin="5" Spacing="15">
+                <Frame Style="{StaticResource CardStyle}" Padding="5" CornerRadius="10">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToNotificationSettingsCommand}" />
+                    </Frame.GestureRecognizers>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Margin="5,0,0,0" Text="Nastavit odběr novinek" TextColor="Black" FontFamily="{StaticResource NunitoRegularFont}" FontSize="18"  />
+                        <Image HorizontalOptions="EndAndExpand">
+                            <Image.Source>
+                                <FontImageSource Glyph="{x:Static helpers:IconFont.ChevronRight}" FontFamily="{StaticResource MaterialIconFont}" Color="{StaticResource SecondaryColor}" />
+                            </Image.Source>
+                        </Image>
+                    </StackLayout>
+                </Frame>
+                <CollectionView ItemsSource="{Binding News}" VerticalScrollBarVisibility="Never">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Style="{StaticResource CardStyle}" CornerRadius="15">
+                                <Grid ColumnDefinitions="Auto,*" RowDefinitions="*, Auto">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type local:UserNotificationPage}}}"
+                                                              CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Label HorizontalTextAlignment="Start" Style="{StaticResource HeaderLabelStyle}" Text="{Binding Text}"/>
+                                    <Label HorizontalTextAlignment="End" Text="{Binding CreateDate,StringFormat='{0:dd.MM.yyyy}'}" TextColor="{Binding}" Grid.Column="1"/>
+                                    <controls:AutoHeigthWebView Grid.Row="1" Grid.ColumnSpan="2">
+                                        <controls:AutoHeigthWebView.Source>
+                                            <HtmlWebViewSource Html="{Binding Description}" />
+                                        </controls:AutoHeigthWebView.Source>
+                                    </controls:AutoHeigthWebView>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+           
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

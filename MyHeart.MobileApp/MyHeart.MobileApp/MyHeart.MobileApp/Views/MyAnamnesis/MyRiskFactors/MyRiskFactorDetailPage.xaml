@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.MyAnamnesis.MyRiskFactors.MyRiskFactorDetailPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters" 
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+                          xmlns:editors="http://schemas.devexpress.com/xamarin/2014/forms/editors">
+    <ContentPage.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter"/>
+        <Style TargetType="{x:Type editors:CheckEdit}">
+            <Setter Property="CheckedCheckBoxColor" Value="{StaticResource SecondaryColor}"/>
+            <Setter Property="CheckBoxColor" Value="{StaticResource SecondaryColor}"/>
+            <Setter Property="LabelColor" Value="#28282B"/>
+            <Setter Property="LabelFontFamily" Value="{StaticResource NunitoBoldFont}"/>
+            <Setter Property="LabelFontSize" Value="18"/>
+            <Setter Property="CheckBoxIndent" Value="15"/>
+        </Style>
+
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Margin="10" RowDefinitions="Auto, *">
+            <controls:TitleHeader Title="Rizikové faktory" ActionCommand="{Binding GoBackCommand}" />
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Grid.Row="1"/>
+            <ScrollView IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" Grid.Row="1">
+                <StackLayout>
+                    <Label Margin="0,0,0,8" Style="{StaticResource RegularLabelStyle}" TextColor="{StaticResource GreyFontColor}" Text="Osobní anamnéza" />
+                    <editors:CheckEdit IsChecked="{Binding FamilyAnamnesis.IsFamily_ICHS}" Label="ICHS" />
+                    <editors:CheckEdit IsChecked="{Binding FamilyAnamnesis.IsFamily_ValveDefect}" Label="Chlopenní vada" />
+                    <editors:CheckEdit IsChecked="{Binding FamilyAnamnesis.IsFamily_AtrialFibrillation}" Label="Fibrilace síní" />
+                    <editors:CheckEdit IsChecked="{Binding FamilyAnamnesis.IsFamily_SuddenDeath}" Label="Náhlá smrt" />
+                    <editors:CheckEdit IsChecked="{Binding FamilyAnamnesis.IsFamily_Pacemaker}" Label="Kardiostimulátor" />
+                    <Label Margin="0,16,0,8" Style="{StaticResource RegularLabelStyle}" TextColor="{StaticResource GreyFontColor}" Text="Abusus" />
+                    <editors:CheckEdit IsChecked="{Binding AbususAnamnesis.IsAbusus_Alcohol}" Label="Alkohol" />
+                    <editors:CheckEdit IsChecked="{Binding AbususAnamnesis.IsAbusus_Smoker}" Label="Kuřák" />
+                    <editors:CheckEdit IsChecked="{Binding AbususAnamnesis.IsAbusus_Exsmoker}" Label="Bývalý kuřák" />
+                    <Label Margin="0,16,0,8" Style="{StaticResource RegularLabelStyle}" TextColor="{StaticResource GreyFontColor}" Text="Sociální anamnéza" />
+                    <editors:CheckEdit IsChecked="{Binding SocialAnamnesis.IsSocial_LivingWithPartner}" Label="Žije s parnerem" />
+                    <editors:CheckEdit IsChecked="{Binding SocialAnamnesis.IsSocial_Working}" Label="Pracující" />
+                    <editors:CheckEdit IsChecked="{Binding SocialAnamnesis.IsSocial_Pension}" Label="Starobní důchod" />
+                    <editors:CheckEdit IsChecked="{Binding SocialAnamnesis.IsSocial_PartialDisabilityPension}" Label="Částečně invalidní důchod" />
+                    <editors:CheckEdit IsChecked="{Binding SocialAnamnesis.IsSocial_DisabilityPension}" Label="Invalidní důchod" />
+                    <Button Style="{StaticResource ActionButton}" Text="Uložit" Command="{Binding SaveCommand}" />
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

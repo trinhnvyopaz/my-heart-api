@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             xmlns:m="clr-namespace:MyHeart.MobileApp.Models"
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels"
+             xmlns:dto="clr-namespace:MyHeart.DTO.User;assembly=MyHeart.DTO"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             xmlns:tabview="clr-namespace:Xam.Plugin.TabView;assembly=Xam.Plugin.TabView"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls" 
+             xmlns:effects="clr-namespace:MyHeart.MobileApp.Utils.Effects"
+             x:Class="MyHeart.MobileApp.Views.ProfilePage"
+             Title="Profil"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <Style x:Key="TitleLabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="Subtitle" />
+            <Setter Property="TextColor" Value="{StaticResource DarkFontColor}" />
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        <converters:BoolToColorConverter TrueColor="{StaticResource MainColor}" FalseColor="Black" x:Key="BoolToColorConverter"/>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter"/>
+        <converters:EqualityToBoolConverter x:Key="EqualityToBoolConverter" />
+        <xct:NotEqualConverter x:Key="NotEqualConverter" />
+        <xct:EqualConverter x:Key="EqualConverter" />
+
+        <Style TargetType="{x:Type Entry}" x:Key="FormInput">
+            <Setter Property="PlaceholderColor" Value="Gray"/>
+            <Setter Property="TextColor" Value="{StaticResource RegulatFontColor}"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+        </Style>
+
+        <Style TargetType="{x:Type Frame}" x:Key="InputFrame">
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HeightRequest" Value="40" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Padding="8">
+            <controls:TitleHeader Title="Profil" ActionCommand="{Binding GoBackCommand}"/>
+            <ActivityIndicator Color="{StaticResource SecondaryColor}" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+            <ScrollView IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}">
+                <StackLayout>
+                    <Label Style="{StaticResource TitleLabelStyle}" Text="Osobní údaje"/>
+
+                    <!--<StackLayout Margin="0,10" Orientation="Horizontal">
+                        <controls:ProfilePictureView/>
+                        <Label Text="Změnit fotku/Nahrát fotku" />
+                    </StackLayout>-->
+
+                    <StackLayout IsVisible="{Binding CurrentUser.UserType, Converter={StaticResource NotEqualConverter}, ConverterParameter={x:Static dto:UType.Doctor}}">
+                        <controls:FormInputView Title="Jméno" Placeholder="Jméno" Text="{Binding User.FirstName}"/>
+                        <controls:FormInputView Title="Přijmení" Placeholder="Přijmení" Text="{Binding User.LastName}"/>
+                        <controls:FormInputView Title="Rodné číslo" Placeholder="Rodné číslo" Text="{Binding User.PIN}"/>
+                        <controls:FormInputView Title="Telefon" Placeholder="Telefon" Text="{Binding User.Phone}"/>
+                        <Frame Margin="0,8" Padding="0,5,0,0" x:Name="InputFrame" Style="{StaticResource InputFrame}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="*, Auto" Margin="8,0">
+                                <Entry IsSpellCheckEnabled="False" InputTransparent="True"  IsReadOnly="True"
+                                   Placeholder="Vyberte pojištovnu" Text="{Binding SelectedInsuranceCompany.Name}"  x:Name="FormInput" Style="{StaticResource FormInput}">
+                                    <Entry.Effects>
+                                        <effects:NoUnderlineEffect />
+                                        <effects:NoDetaultBorderEffectiOS/>
+                                    </Entry.Effects>
+                                </Entry>
+                                <Image InputTransparent="True" Grid.Column="1">
+                                    <Image.Source>
+                                        <FontImageSource FontFamily="{StaticResource MaterialIconFont}" Glyph="{x:Static helpers:IconFont.ChevronDown}" Color="{StaticResource SecondaryColor}"/>
+                                    </Image.Source>
+                                </Image>
+                            </Grid>
+
+                        </Frame>
+                        <Picker IsVisible="false" ItemsSource="{Binding InsuranceCompanies}" ItemDisplayBinding="{Binding Name}" x:Name="InsurancePicker" SelectedItem="{Binding SelectedInsuranceCompany}"/>
+                        <controls:FormInputView Title="Číslo pojistěnce" Placeholder="Číslo pojištěnce" Text="{Binding User.InsuranceNumber}"/>
+
+                        <Label Margin="0,10" Style="{StaticResource TitleLabelStyle}" Text="Adresa"/>
+
+                        <controls:FormInputView Title="Ulice" Placeholder="Ulice" Text="{Binding User.Street}"/>
+                        <controls:FormInputView Title="Číslo ulice" Placeholder="Číslo ulice" Text="{Binding User.StreetNumber}"/>
+                        <controls:FormInputView Title="Město" Placeholder="Město" Text="{Binding User.City}"/>
+                        <controls:FormInputView Title="PSČ" Placeholder="PSČ" Text="{Binding User.Zip}"/>
+                    </StackLayout>
+                    <controls:DoctorDetailView IsVisible="{Binding CurrentUser.UserType, Converter={StaticResource EqualConverter}, ConverterParameter={x:Static dto:UType.Doctor}}"  />
+
+                    <StackLayout Orientation="Horizontal" IsVisible="{Binding CurrentPlatform, Converter={StaticResource EqualityToBoolConverter}, ConverterParameter={x:Static Device.Android}}">
+                        <Label Text="Povolit Google fit"/>
+                        <Switch Style="{StaticResource BaseSwitch}" IsToggled="{Binding GoogleFitEnabled, Mode=TwoWay}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Povolit biometrické přihlášení"/>
+                        <Switch Style="{StaticResource BaseSwitch}" IsToggled="{Binding BiometricAutheticationEnabled}"/>
+                    </StackLayout>
+
+                    <Button Margin="0, 10, 0, 0" Style="{StaticResource ActionButton}" Text="Uložit" Command="{Binding SaveProfileCommand}" />
+                </StackLayout>
+
+            </ScrollView>
+
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

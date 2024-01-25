@@ -1,0 +1,32 @@
+﻿<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:MyHeart.MobileApp.Views.MyAnamnesis"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             x:Class="MyHeart.MobileApp.Views.MyAnamnesis.AnamnesisDetailPage">
+    <pages:PopupPage.Content>
+        <Frame Margin="10" VerticalOptions="CenterAndExpand">
+            <StackLayout>
+                <Grid ColumnDefinitions=".75*, .15*">
+                    <StackLayout Grid.Column="0" Orientation="Horizontal">
+                        <Label HorizontalOptions="Start" Text="{Binding Subtitle, Source={RelativeSource AncestorType={x:Type view:AnamnesisDetailPage}}}"
+                               TextColor="{Binding HeaderFontColor, Source={RelativeSource AncestorType={x:Type view:AnamnesisDetailPage}}}"
+                               VerticalTextAlignment="Center" FontFamily="{StaticResource NunitoBoldFont}" FontSize="18"/>
+                        <Label HorizontalOptions="StartAndExpand" MinimumWidthRequest="90" VerticalTextAlignment="Center" Text="{Binding Value, Source={RelativeSource AncestorType={x:Type view:AnamnesisDetailPage}}}"
+                           Style="{StaticResource HeaderLabelStyle}" TextColor="{StaticResource SecondaryColor}" FontFamily="{StaticResource NunitoRegularFont}" FontSize="18"/>
+                    </StackLayout>
+
+                    <Button Grid.Column="2" Style="{StaticResource CloseButton}" Command="{Binding GoBackCommand}" />
+                </Grid>
+
+                <ContentView BindingContext="{Binding Item}" Content="{Binding ItemView, Source={RelativeSource AncestorType={x:Type view:AnamnesisDetailPage}}}"/>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Smazat" BackgroundColor="Transparent" CornerRadius="23" HorizontalOptions="StartAndExpand" BorderColor="{StaticResource MainColor}" 
+                            BorderWidth="1" TextColor="{StaticResource MainColor}" WidthRequest="126" Command="{Binding DeleteItemCommand}" />
+                    <Button Style="{StaticResource ActionButton}" WidthRequest="169" Text="Uložit" HorizontalOptions="EndAndExpand" Command="{Binding SaveCommand}" />
+                </StackLayout>
+
+            </StackLayout>
+        </Frame>
+    </pages:PopupPage.Content>
+</pages:PopupPage>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24.3" height="24.3" viewBox="0 0 24.3 24.3">
+  <g id="barcode-scanner" transform="translate(0.15 0.15)">
+    <path id="Path_9862" data-name="Path 9862" d="M.5,7A.5.5,0,0,1,0,6.5v-4A2.5,2.5,0,0,1,2.5,0h4a.5.5,0,0,1,0,1h-4A1.5,1.5,0,0,0,1,2.5v4A.5.5,0,0,1,.5,7Z" fill="#0666eb" stroke="#0666eb" stroke-width="0.3"/>
+    <g id="Group_11003" data-name="Group 11003">
+      <path id="Path_9859" data-name="Path 9859" d="M23.5,7a.5.5,0,0,1-.5-.5v-4A1.5,1.5,0,0,0,21.5,1h-4a.5.5,0,0,1,0-1h4A2.5,2.5,0,0,1,24,2.5v4A.5.5,0,0,1,23.5,7Z" fill="#0666eb" stroke="#0666eb" stroke-width="0.3"/>
+      <path id="Path_9860" data-name="Path 9860" d="M21.5,24h-4a.5.5,0,0,1,0-1h4A1.5,1.5,0,0,0,23,21.5v-4a.5.5,0,0,1,1,0v4A2.5,2.5,0,0,1,21.5,24Z" fill="#0666eb" stroke="#0666eb" stroke-width="0.3"/>
+      <path id="Path_9861" data-name="Path 9861" d="M6.5,24h-4A2.5,2.5,0,0,1,0,21.5v-4a.5.5,0,0,1,1,0v4A1.5,1.5,0,0,0,2.5,23h4a.5.5,0,0,1,0,1Z" fill="#0666eb" stroke="#0666eb" stroke-width="0.3"/>
+      <path id="Path_9863" data-name="Path 9863" d="M17.5,19H6.5A1.5,1.5,0,0,1,5,17.5v-3a.5.5,0,0,1,1,0v3a.5.5,0,0,0,.5.5h11a.5.5,0,0,0,.5-.5v-3a.5.5,0,0,1,1,0v3A1.5,1.5,0,0,1,17.5,19Z" fill="#0666eb" stroke="#0666eb" stroke-width="0.3"/>
+      <path id="Path_9864" data-name="Path 9864" d="M18.5,11a.5.5,0,0,1-.5-.5v-4a.5.5,0,0,0-.5-.5H6.5a.5.5,0,0,0-.5.5v4a.5.5,0,0,1-1,0v-4A1.5,1.5,0,0,1,6.5,5h11A1.5,1.5,0,0,1,19,6.5v4A.5.5,0,0,1,18.5,11Z" fill="#0666eb" stroke="#0666eb" stroke-width="0.3"/>
+      <path id="Path_9865" data-name="Path 9865" d="M20.5,15H3.5a.5.5,0,0,1,0-1h17a.5.5,0,0,1,0,1Z" fill="#0666eb" stroke="#0666eb" stroke-width="0.3"/>
+      <rect id="Rectangle_2859" data-name="Rectangle 2859" width="24" height="24" fill="none"/>
+    </g>
+  </g>
+</svg>

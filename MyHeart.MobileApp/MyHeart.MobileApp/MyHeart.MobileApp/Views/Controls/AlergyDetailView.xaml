@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             x:Class="MyHeart.MobileApp.Views.Controls.AlergyDetailView"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views.MyAnamnesis">
+  <ContentView.Content>
+      <StackLayout>
+            <Label Style="{StaticResource SubtitleLabelStyle}" Text="{Binding BindingContext.Item.IsAllergy_Name, Source={RelativeSource AncestorType={x:Type local:AnamnesisDetailPage}}}" />
+            <controls:FormInputView InputColor="{StaticResource BackgroundColor}" Title="Poznánka" x:Name="NoteInput" />
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

@@ -1,0 +1,19 @@
+
+
+.full-height
+{
+    height: 100%;    
+}
+.splitter{
+    color:darkorange;
+    margin-top:8px;
+}
+.brand-logo{
+    color:darkorange;
+}
+.page-title{
+    color:whitesmoke;
+}
+.navbar-brand {
+    cursor: pointer;    
+}

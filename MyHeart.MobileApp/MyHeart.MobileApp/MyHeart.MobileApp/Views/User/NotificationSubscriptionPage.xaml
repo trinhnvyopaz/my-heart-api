@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.User.NotificationSubscriptionPage"
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels.User"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.BindingContext>
+        <vm:NotificationSubscriptionPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="{x:Type input:RadioButton}">
+            <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+            <Setter Property="Color" Value="{StaticResource SecondaryColor}" />
+        </Style>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+            <Grid RowDefinitions="Auto,20,*, Auto" IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}">
+                <controls:TitleHeader  Title="Nastevení odběru" ActionCommand="{Binding GoBackCommand}" />
+                <StackLayout Spacing="15" Grid.Row="2" Margin="8">
+                    <Label Text="Notifikace o nových odpovědích" Style="{StaticResource HeaderLabelStyle}" />
+                    <Grid Grid.Row="2" RowDefinitions="Auto" ColumnDefinitions="*,Auto" >
+                        <Label Text="Emailové notifikace o nových odpovědích" Style="{StaticResource RegularLabelStyle}" VerticalOptions="CenterAndExpand" />
+                        <Switch Grid.Column="2" IsToggled="{Binding NotificationSettings.ReplyEmailNotification}" HorizontalOptions="EndAndExpand" Style="{StaticResource BaseSwitch}" />
+                    </Grid>
+
+                    <input:RadioButtonGroupView SelectedIndex="{Binding NotificationSettings.SubscriptionPreferences}">
+                        <Label Margin="0,20,0,0" Text="Notifikace o novinkách v léčbě" Style="{StaticResource HeaderLabelStyle}" />
+                        <StackLayout Grid.Row="2" Orientation="Horizontal">
+                            <Label Text="Všechny novinky" Style="{StaticResource RegularLabelStyle}" VerticalOptions="CenterAndExpand" />
+                            <input:RadioButton />
+                        </StackLayout>
+                        <StackLayout Grid.Row="2" Orientation="Horizontal">
+                            <Label Text="Pouze moje onemocnění" Style="{StaticResource RegularLabelStyle}" VerticalOptions="CenterAndExpand" />
+                            <input:RadioButton />
+                        </StackLayout>
+                        <StackLayout Grid.Row="2" Orientation="Horizontal">
+                            <Label Text="Nepřeji si dostávat žádné informace" Style="{StaticResource RegularLabelStyle}" VerticalOptions="CenterAndExpand" />
+                            <input:RadioButton />
+                        </StackLayout>
+                    </input:RadioButtonGroupView>
+
+                    <Button Style="{StaticResource ActionButton}" Command="{Binding SaveNotificationSettingsCommand}" Text="Uložit" VerticalOptions="EndAndExpand" Margin="0,0,0,20"/>
+
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

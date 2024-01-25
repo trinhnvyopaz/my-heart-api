@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             Title="Přidejte soubor"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="True"
+             xmlns:myreports="clr-namespace:MyHeart.MobileApp.ViewModels.MyReports"
+             xmlns:dxe="clr-namespace:DevExpress.XamarinForms.Editors;assembly=DevExpress.XamarinForms.Editors"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:dxp="http://schemas.devexpress.com/xamarin/2014/forms/popup"
+             x:Class="MyHeart.MobileApp.Views.MyReports.ReportAddFilePage">
+    <ContentPage.Resources>
+        <Style x:Key="ActionButton" TargetType="{x:Type Button}">
+            <Setter Property="TextColor" Value="{StaticResource SecondaryColor}"/>
+            <Setter Property="BackgroundColor" Value="#500666eb"/>
+            <Setter Property="Opacity" Value="0.15" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="Margin" Value="16,8" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto, *, Auto">
+            <controls:TitleHeader Title="Přidat soubor" ActionCommand="{Binding GoBackCommand}" />
+            <StackLayout Margin="16,0" Grid.RowSpan="2" Spacing="25" VerticalOptions="CenterAndExpand">
+                <Label FontFamily="{StaticResource NunitoSemiBoldFont}" Text="Nahrajte dokument" HorizontalOptions="CenterAndExpand" FontSize="17" TextColor="{StaticResource MediumGreyFont}" />
+                <controls:IconButtonView Command="{Binding TakePhotoCommand}" Title="Vyfotit" Icon="camera.png"/>
+                <controls:IconButtonView IsVisible="{OnPlatform Android=False, iOS=True}" Title="Skenovat" Icon="barcodescanner.png"/>
+                <controls:IconButtonView Command="{Binding PickFileCommand}" Title="Vybrat obrázek/PDF" Icon="pdficon.png"/>
+            </StackLayout>
+            <dxp:DXPopup IsOpen="{Binding ShowFilePickerAppDialog}"
+                         AllowScrim="True"
+                         VerticalAlignment="Bottom"
+                         HorizontalAlignment="Stretch"
+                         Margin="16"
+                         CornerRadius="16">
+                <StackLayout Orientation="Vertical">
+
+                    <dxe:SimpleButton Text="Vybrat soubor"
+                                      IconColor="{StaticResource DarkFontColor}"
+                                      TextColor="{StaticResource DarkFontColor}"
+                                      Padding="24,24,24,8"
+                                      IconIndent="16"
+                                      HorizontalContentAlignment="Center"
+                                      Command="{Binding PickFileiOSCommand}"
+                                      HorizontalOptions="Fill"
+                                      PressedBackgroundColor="Transparent"
+                                      BackgroundColor="Transparent"/>
+
+                    <dxe:SimpleButton Text="Vybrat fotku z knihovny"
+                                      IconColor="{StaticResource DarkFontColor}"
+                                      TextColor="{StaticResource DarkFontColor}"
+                                      Padding="24,8"
+                                      IconIndent="16"
+                                      PressedBackgroundColor="Transparent"
+                                      Command="{Binding PickPhotoiOSCommand}"
+                                      HorizontalContentAlignment="Center"
+                                      HorizontalOptions="Fill"
+                                      BackgroundColor="Transparent"/>
+
+
+                    <BoxView BackgroundColor="{StaticResource LightGreyFontColor}" Opacity="0.5" HeightRequest="1" Margin="24,0"/>
+                    <dxe:SimpleButton Text="Zrušit"
+                                      TextColor="{StaticResource DarkFontColor}"
+                                      BackgroundColor="Transparent"
+                                      HorizontalContentAlignment="Center"
+                                      PressedBackgroundColor="Transparent"
+                                      Command="{Binding ClosePickerAppDialogCommand}"
+                                      Margin="0,0,0,6"/>
+                </StackLayout>
+            </dxp:DXPopup>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

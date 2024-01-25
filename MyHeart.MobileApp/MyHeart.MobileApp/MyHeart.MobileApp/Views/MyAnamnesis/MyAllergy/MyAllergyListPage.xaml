@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             x:Class="MyHeart.MobileApp.Views.MyAnamnesis.MyAllergy.MyAllergyListPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             NavigationPage.HasBackButton="False"             
+             BackgroundColor="{StaticResource BackgroundColor}"
+             xmlns:viewmodels="clr-namespace:MyHeart.MobileApp.ViewModels"
+             xmlns:dto="clr-namespace:MyHeart.DTO.User;assembly=MyHeart.DTO"
+             x:DataType="{x:Type viewmodels:MyAlergyListViewModel}"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views.MyAnamnesis.MyAllergy">
+
+    <ContentPage.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto, *,Auto">
+            <Grid Margin="8,0,0,0" Grid.Row="0" ColumnDefinitions="Auto, *">
+                <Label Style="{StaticResource HeaderLabelStyle}" Text="Alergie" Grid.ColumnSpan="2" HorizontalTextAlignment="Center"/>
+                <ImageButton Command="{Binding GoBackCommand}" >
+                    <ImageButton.Source>
+                        <FontImageSource FontFamily="MaterialIconFont" Glyph="{Static helpers:IconFont.ArrowLeftTop}" Color="{StaticResource SecondaryColor}" />
+                    </ImageButton.Source>
+                </ImageButton>
+            </Grid>
+            <CollectionView Grid.Row="1" Margin="8,0" ItemsSource="{Binding Items}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type dto:UserAnamnesisDTO}">
+                        <Frame CornerRadius="10" Style="{StaticResource CardStyle}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type local:MyAllergyListPage}}}" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Style="{StaticResource SubtitleLabelStyle}" Text="{Binding IsAllergy_Name}" />
+                                <ImageButton Style="{StaticResource RightArrowButtonStyle}" HorizontalOptions="EndAndExpand" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <ImageButton Style="{StaticResource AddCircleButton}" Grid.Row="2" Command="{Binding AddItemCommand}" />
+        </Grid>
+
+
+
+        <!--<Frame Margin="10">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Entry Placeholder="Alergie" HorizontalOptions="FillAndExpand" Text="{Binding UserAllergy.IsAllergy_Name}" />
+                    
+                    <ImageButton  BackgroundColor="Transparent" Command="{Binding AddItemCommand}">
+                        <ImageButton.Source>
+                            <FontImageSource Glyph="{x:Static helpers:IconFont.Send}" FontFamily="MaterialIconFont" Color="{StaticResource MainColor}" />
+                        </ImageButton.Source>
+                    </ImageButton>                    
+                </StackLayout>
+                <Button HorizontalOptions="CenterAndExpand" Text="Zpět" Command="{Binding GoBackCommand}" Style="{StaticResource MediumButton}" IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" />
+            </StackLayout>
+             
+        </Frame>-->
+    </ContentPage.Content>
+</ContentPage>

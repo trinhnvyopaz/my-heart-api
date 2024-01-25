@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.Controls.CardViewHeader"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views.Controls">
+    <ContentView.Resources>
+        <Style TargetType="{x:Type Label}" x:Key="TitleStyle">
+            <Setter Property="TextColor" Value="#0666EB" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontFamily" Value="{StaticResource NunitoBoldFont}"/>
+        </Style>
+
+        <Style TargetType="{x:Type Label}" x:Key="TitleValueStyle" BasedOn="{StaticResource TitleStyle}">
+            <Setter Property="FontFamily" Value="{StaticResource NunitoRegularFont}"/>
+        </Style>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout x:Name="MainLayout" Orientation="Horizontal" Spacing="0">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ActionCommand}" />
+            </StackLayout.GestureRecognizers>
+            <Label x:Name="TitleLabel" Style="{StaticResource TitleStyle}" HorizontalOptions="StartAndExpand" />
+            <Label x:Name="ValueLabel" Style="{StaticResource TitleValueStyle}" HorizontalOptions="EndAndExpand" />
+            <ImageButton Margin="10,0,0,0" Source="rightarrow.png" HeightRequest="9.15" WidthRequest="11"  />
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

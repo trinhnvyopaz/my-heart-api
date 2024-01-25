@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             mc:Ignorable="d" HeightRequest="140"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             x:Class="MyHeart.MobileApp.Views.Controls.DashboardCardView">
+    <ContentView.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="TextColor" Value="{StaticResource LightFontColor}" />
+        </Style>
+        <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Frame x:Name="MainFrame" Padding="8" CornerRadius="10" HasShadow="False">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer x:Name="FrameTapGesture" Command="{Binding Command}"/>
+            </Frame.GestureRecognizers>
+            <StackLayout Spacing="0">
+                <Label x:Name="TitleLabel" Opacity="0.69" FontSize="16" FontFamily="{StaticResource NunitoBoldFont}" TextColor="#28282B"  />
+                <Label x:Name="SubtitleLabel" Opacity="0.7" FontSize="12" TextColor="#47474A" FontFamily="{StaticResource NunitoRegularFont}"/>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand">
+                    <Label x:Name="ValueLabel" VerticalOptions="CenterAndExpand" FontSize="36" FontFamily="{StaticResource NunitoExtraBoldFont}" />
+                    <Label x:Name="UnitLabel" VerticalOptions="CenterAndExpand" FontSize="30" TextColor="#293457" FontFamily="{StaticResource NunitoRegularFont}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand">
+                    <Label x:Name="ProgressLabel" FontSize="14" FontFamily="{StaticResource NunitoRegularFont}" TextColor="#97989D"/>
+                    <Label x:Name="UnitProgressLabel" FontSize="14" FontFamily="{StaticResource NunitoRegularFont}" TextColor="#97989D"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

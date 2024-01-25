@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            mc:Ignorable="d"
+            NavigationPage.HasNavigationBar="False"
+            xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+            xmlns:view="clr-namespace:MyHeart.MobileApp.Views"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"            
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            android:TabbedPage.BarItemColor="{StaticResource DarkFontColor}"
+            android:TabbedPage.BarSelectedItemColor="{StaticResource SecondaryColor}"
+            x:Class="MyHeart.MobileApp.Views.MainPage">
+
+    <TabbedPage.Children>
+        <NavigationPage Title="Zdravotní stav" NavigationPage.HasNavigationBar="False" IconImageSource="healthstatus.png">
+            <x:Arguments>
+                <view:DashboardPage/>
+            </x:Arguments>
+        </NavigationPage>
+
+        <NavigationPage Title="Anamnéza" NavigationPage.HasNavigationBar="False" IconImageSource="anamnesis.png">
+            <x:Arguments>
+                <view:MyAnamnesisPage/>
+            </x:Arguments>
+        </NavigationPage>
+
+        <!--<NavigationPage Title="Doporučení" NavigationPage.HasNavigationBar="False" IconImageSource="recomendation.pngquestions.png">
+            <x:Arguments>
+                <view:RecomandationsPage/>
+            </x:Arguments>
+        </NavigationPage>-->
+
+        <NavigationPage Title="Dotazy" NavigationPage.HasNavigationBar="False" IconImageSource="questions.png">
+            <x:Arguments>
+                <view:MyQuestionsPage/>
+            </x:Arguments>
+        </NavigationPage>
+        
+    </TabbedPage.Children>
+</TabbedPage>

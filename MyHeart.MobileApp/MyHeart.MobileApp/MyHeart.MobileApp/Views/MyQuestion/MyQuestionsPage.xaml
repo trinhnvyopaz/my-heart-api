@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels"
+             Title="Dotazy"
+
+             xmlns:q="clr-namespace:MyHeart.MobileApp.Views"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             x:Class="MyHeart.MobileApp.Views.MyQuestionsPage"
+             xmlns:effects="clr-namespace:MyHeart.MobileApp.Utils.Effects"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:dto="clr-namespace:MyHeart.DTO.Questions;assembly=MyHeart.DTO" 
+              xmlns:dxn="http://schemas.devexpress.com/xamarin/2014/forms/navigation">
+    <ContentPage.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+        <converters:QuestionStatusToTextConverter x:Key="QuestionStatusToTextConverter" />
+        <converters:QuestionStatusToIconConverter x:Key="QuestionStatusToIconConverter" />
+        <converters:QuestionStatusToColorConverter x:Key="QuestionStatusToColorConverter" />
+        <converters:BoolToColorConverter x:Key="BoolToColorConverter" TrueColor="{StaticResource SecondaryColor}" FalseColor="#6E6C69" />
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto, *">
+        <controls:MainHeaderView Title="Dotazy" Grid.Row="0" />
+        <dxn:TabView ItemHeaderFontFamily="{d:StaticResource NunitoBoldFont}" SelectedItemIndex="{Binding SelectedTabIndex, Mode=TwoWay}" SelectedItemIndicatorColor="{StaticResource SecondaryColor}"
+                     Grid.Row="1" ItemHeaderFontSize="18" HeaderPanelPosition="Top" ItemHeaderTextColor="#6E6C69" SelectedItemHeaderTextColor="{StaticResource SecondaryColor}" SwipeEnabled="False"
+                     ItemHeaderWidth="*" HeaderPanelBackgroundColor="{StaticResource BackgroundColor}" SelectedItemHeaderBackgroundColor="{StaticResource BackgroundColor}" HeaderPanelShadowHeight="2" HeaderPanelShadowColor="#55ADA592">
+            <dxn:TabViewItem HeaderText="Otevřené dotazy">
+                <StackLayout>
+                    <ActivityIndicator Color="{StaticResource SecondaryColor}" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                    <RefreshView Command="{Binding RefreshCommand}" BackgroundColor="Transparent" RefreshColor="Transparent" IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+                        <CollectionView ItemsSource="{Binding OpenQuestions}" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}" RemainingItemsThreshold="0">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="{x:Type dto:QuestionListDTO}">
+                                    <StackLayout>
+                                        <SwipeView>
+                                            <SwipeView.RightItems>
+                                                <SwipeItem BackgroundColor="{d:StaticResource ErrorColor}" Command="{Binding BindingContext.DeleteCommnad, Source={RelativeSource AncestorType={x:Type q:MyQuestionsPage}}}" CommandParameter="{Binding Id}">
+                                                    <SwipeItem.IconImageSource>
+                                                        <FontImageSource FontFamily="MaterialIconFont" Glyph="{x:Static helpers:IconFont.TrashCan}" Color="White" />
+                                                    </SwipeItem.IconImageSource>
+                                                </SwipeItem>
+                                            </SwipeView.RightItems>
+                                            <controls:QuestionCardView  BindingContext="{Binding .}">
+                                                <controls:QuestionCardView.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding GoToChatPageCommnad, Source={RelativeSource AncestorType={x:Type vm:MyQuestionsPageViewModel}}}"
+                                                                          CommandParameter="{Binding .}" />
+                                                </controls:QuestionCardView.GestureRecognizers>
+                                            </controls:QuestionCardView>
+                                        </SwipeView>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </RefreshView>
+                    <Button Margin="0,0,10,10" Style="{StaticResource ActionButton}" Text="Nový dotaz" Command="{Binding GoToNewQuastionPageCommnad}"  HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+            </dxn:TabViewItem>
+            <dxn:TabViewItem HeaderText="Archiv">
+                <StackLayout>
+                    <ActivityIndicator Color="{StaticResource SecondaryColor}" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                    <RefreshView IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" Command="{Binding RefreshCommand}"
+                                        BackgroundColor="Transparent" RefreshColor="Transparent" IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+                        <CollectionView ItemsSource="{Binding ClosedQuestions}" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}" RemainingItemsThreshold="0">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="{x:Type dto:QuestionListDTO}">
+                                    <StackLayout>
+                                        <SwipeView>
+                                            <SwipeView.RightItems>
+                                                <SwipeItem BackgroundColor="{d:StaticResource ErrorColor}" Command="{Binding BindingContext.DeleteCommnad, Source={RelativeSource AncestorType={x:Type q:MyQuestionsPage}}}" CommandParameter="{Binding Id}">
+                                                    <SwipeItem.IconImageSource>
+                                                        <FontImageSource FontFamily="MaterialIconFont" Glyph="{x:Static helpers:IconFont.TrashCan}" Color="White" />
+                                                    </SwipeItem.IconImageSource>
+                                                </SwipeItem>
+                                            </SwipeView.RightItems>
+                                            <controls:QuestionCardView BindingContext="{Binding .}">
+                                                <controls:QuestionCardView.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding GoToChatPageCommnad, Source={RelativeSource AncestorType={x:Type vm:MyQuestionsPageViewModel}}}"
+                                                                          CommandParameter="{Binding .}" />
+                                                </controls:QuestionCardView.GestureRecognizers>
+                                            </controls:QuestionCardView>
+                                        </SwipeView>
+
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </RefreshView>
+                </StackLayout>
+            </dxn:TabViewItem>
+        </dxn:TabView>
+        <!--<tabs:TabViewControl Grid.Row="1" x:Name="TabView" HeaderTabTextFontSize="18" HeaderBackgroundColor="Transparent" 
+                         SelectedTabIndex="{Binding SelectedTabIndex, Mode=TwoWay}" HeaderTabTextFontFamily="{d:StaticResource NunitoBoldFont}" HeaderTabTextColor="{StaticResource SecondaryColor}"
+                         HeaderSelectionUnderlineColor="{StaticResource SecondaryColor}" VerticalOptions="FillAndExpand" HeaderSelectionUnderlineThickness="2">
+            <tabs:TabViewControl.ItemSource>
+                <tabs:TabItem HeaderTextColor="{StaticResource SecondaryColor}" HeaderText="Otevřené dotazy">
+                    <StackLayout>
+                        <ActivityIndicator Color="{StaticResource SecondaryColor}" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                        <RefreshView Command="{Binding RefreshCommand}" BackgroundColor="Transparent" RefreshColor="Transparent" IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+                            <CollectionView ItemsSource="{Binding OpenQuestions}" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}" RemainingItemsThreshold="0">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="{x:Type dto:QuestionListDTO}">
+                                        <StackLayout>
+                                            <controls:QuestionCardView BindingContext="{Binding .}">
+                                                <controls:QuestionCardView.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding GoToChatPageCommnad, Source={RelativeSource AncestorType={x:Type vm:MyQuestionsPageViewModel}}}"
+                                                                          CommandParameter="{Binding .}" />
+                                                </controls:QuestionCardView.GestureRecognizers>
+                                            </controls:QuestionCardView>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </RefreshView>
+                        <Button Margin="0,0,10,10" Style="{StaticResource ActionButton}" Text="Nový dotaz" Command="{Binding GoToNewQuastionPageCommnad}"  HorizontalOptions="EndAndExpand" />
+                    </StackLayout>
+                </tabs:TabItem>
+                <tabs:TabItem HeaderText="Archiv" HeaderTextColor="{StaticResource SecondaryColor}">
+                    <StackLayout>
+                        <ActivityIndicator Color="{StaticResource SecondaryColor}" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                        <RefreshView IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" Command="{Binding RefreshCommand}"
+                                        BackgroundColor="Transparent" RefreshColor="Transparent" IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+                            <CollectionView ItemsSource="{Binding ClosedQuestions}" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}" RemainingItemsThreshold="0">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="{x:Type dto:QuestionListDTO}">
+                                        <StackLayout>
+                                            <controls:QuestionCardView BindingContext="{Binding .}"/>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </RefreshView>
+                    </StackLayout>
+                </tabs:TabItem>
+            </tabs:TabViewControl.ItemSource>
+        </tabs:TabViewControl>-->
+    </Grid>
+</ContentPage>

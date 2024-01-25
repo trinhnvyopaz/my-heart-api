@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.ChatPage"
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             xmlns:dto="clr-namespace:MyHeart.DTO.Questions;assembly=MyHeart.DTO"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             xmlns:behaviors="clr-namespace:MyHeart.MobileApp.Utils.Behaviour"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             xmlns:effects="clr-namespace:MyHeart.MobileApp.Utils.Effects" xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             xmlns:editors="http://schemas.devexpress.com/xamarin/2014/forms/editors">
+    <ContentPage.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+
+        <Grid RowDefinitions="Auto, *, Auto">
+            <Grid Margin="5,0" ColumnDefinitions="*">
+                <controls:TitleHeader Title="{Binding QuestionSubject}" ActionCommand="{Binding GoBackCommand}"/>
+                <ImageButton HorizontalOptions="EndAndExpand" Command="{Binding StartVideoChatCommand}">
+                    <ImageButton.Source>
+                        <FontImageSource Glyph="{x:Static helpers:IconFont.Video}" FontFamily="{StaticResource MaterialIconFont}" Color="{StaticResource SecondaryColor}" />
+                    </ImageButton.Source>
+                </ImageButton>
+            </Grid>
+            
+            <CollectionView SelectionMode="None" BackgroundColor="Transparent" IsEnabled="True" VerticalOptions="FillAndExpand" x:Name="MessagesCollectionView" VerticalScrollBarVisibility="Never"
+                            Scrolled="MessagesCollectionView_Scrolled"  ItemsSource="{Binding Messages}" Grid.Row="1">
+                <CollectionView.Header>
+                    <StackLayout HeightRequest="300" BackgroundColor="Transparent">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="Large">Začátek chatu</Label>
+                    </StackLayout>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type vm:QuestionCommentViewModel}">
+                        <StackLayout Grid.Column="1" HorizontalOptions="StartAndExpand">
+                            <StackLayout.Triggers>
+                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding IsMine}" Value="True">
+                                    <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+                                </DataTrigger>
+                            </StackLayout.Triggers>
+
+                            <Label Text="{Binding CreatedAt, StringFormat='{0:dd.MM.yyyy}'}" HorizontalTextAlignment="Center" FontSize="16" TextColor="#47474A" Opacity=".53"/>
+
+                            <Frame HasShadow="False" BackgroundColor="White" Padding="15,15" Margin="2,2,54,2" CornerRadius="18">
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="{x:Type Frame}" Binding="{Binding IsMine}" Value="True">
+                                        <Setter Property="BackgroundColor" Value="#BBD5F5" />
+                                        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+                                        <Setter Property="Margin" Value="54,2,2,2" />
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="{Binding User}" FontSize="22" TextColor="#28282B">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="{x:Type Label}" Binding="{Binding IsMine}" Value="True">
+                                                <Setter Property="IsVisible" Value="False" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                    <Label Text="{Binding Message}" TextColor="#47474A" FontSize="16"/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <editors:MultilineEdit BorderThickness="0" Margin="10,5" BackgroundColor="White" FocusedBorderThickness="0"  PlaceholderColor="{StaticResource DarkGreyFontColor}"
+                                    CornerMode="Round" MinimumHeightRequest="40" CornerRadius="18" PlaceholderText="Napište zprávu" ClearIconVisibility="Never"
+                                    Grid.Row="2" IconSpacing="0" TextFontFamily="{StaticResource NunitoRegularFont}" TextFontSize="18" TextColor="{StaticResource DarkFontColor}" 
+                                    BoxPadding="10,4,4,4" EndIconColor="{StaticResource SecondaryColor}" EndIconCommand="{Binding SendCommand}" Text="{Binding NewMessage.Message}">
+                <editors:MultilineEdit.Triggers>
+                    <DataTrigger TargetType="{x:Type editors:MultilineEdit}" Binding="{Binding Question.Status}" Value="{x:Static dto:QuestionStatus.Closed}">
+                        <Setter Property="IsEnabled" Value="False" />
+                    </DataTrigger>
+                </editors:MultilineEdit.Triggers>
+                <editors:MultilineEdit.EndIcon>
+                    <FontImageSource FontFamily="MaterialIconFont" Color="{StaticResource SecondaryColor}" Glyph="{x:Static helpers:IconFont.Send}" />
+                </editors:MultilineEdit.EndIcon>
+            </editors:MultilineEdit>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

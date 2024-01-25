@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.Controls.IconButtonView"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views.Controls">
+    <ContentView.Content>
+        <Grid x:Name="MainGrid">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer x:Name="MainGridTapGesture" />
+            </Grid.GestureRecognizers>
+            <Frame Padding="0" HeightRequest="42" HasShadow="False" BackgroundColor="{StaticResource SecondaryColor}" Opacity="0.15">
+                <Frame.CornerRadius>
+                    <OnPlatform x:TypeArguments="x:Single">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="23" />
+                            <On Platform="Android" Value="26" />
+ 
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </Frame.CornerRadius>
+            </Frame>
+            <Image x:Name="IconImage" Margin="24,0,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="24" WidthRequest="24"/>
+            <Label x:Name="TitleLabel" FontSize="19" FontFamily="{StaticResource NunitoBoldFont}" BackgroundColor="Transparent"
+                   TextColor="{StaticResource SecondaryColor}" Opacity="1" HorizontalOptions="CenterAndExpand"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

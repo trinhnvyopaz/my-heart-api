@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.Questionnaire.QuestionnairePage"
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels.Questionnaire"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views.Questionnaire"
+             x:DataType="{x:Type vm:QuestionnairePageViewModel}"
+             Title="Mám potíže"
+             xmlns:dto="clr-namespace:MyHeart.DTO.ProfessionalInformation;assembly=MyHeart.DTO" xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters">
+
+    <ContentPage.BindingContext>
+        <vm:QuestionnairePageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style x:Key="NavigationButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="CornerRadius" Value="0"/>
+            <Setter Property="TextColor" Value="{StaticResource LightFontColor}"/>
+        </Style>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto, *">
+            <Grid Grid.Column="0" ColumnDefinitions="*, 2*, *">
+                <ImageButton BackgroundColor="Transparent" HorizontalOptions="StartAndExpand" Grid.Column="0" Command="{Binding GoBackCommand}">
+                    <ImageButton.Source>
+                        <FontImageSource FontFamily="{StaticResource MaterialIconFont}" Glyph="{Static helpers:IconFont.ArrowLeftTop}" Color="{StaticResource SecondaryColor}" />
+                    </ImageButton.Source>
+                </ImageButton>
+                <Label FontSize="17" Style="{StaticResource HeaderLabelStyle}" Grid.Column="1" Text="Mám obtíže" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+            </Grid>
+
+            <CarouselView IsSwipeEnabled="False" Margin="0,5"
+                          CurrentItem="{Binding CurrentStep, Mode=TwoWay}"
+                          Position="{Binding CurrentStepPosition}" Grid.Row="1" ItemsSource="{Binding Steps}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type ContentView}">
+                        <ContentView BindingContext="{Binding BindingContext, Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:QuestionnairePage}}}" Content="{Binding .}" />
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

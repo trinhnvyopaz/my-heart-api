@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.Controls.MyIllnessCollectionView"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             xmlns:view="clr-namespace:MyHeart.MobileApp.Views.MyAnamnesis"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers">
+    <ContentView.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <CollectionView x:Name="ItemCollectionView"  IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" ItemsSource="{Binding Items}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame Style="{StaticResource DetailCardView}">
+                            <Grid RowDefinitions="Auto, *, Auto">
+                                <Label Text="{Binding Disease.Name}" Style="{StaticResource HeaderLabelStyle}"/>
+                                <controls:MyIllnessDetailView EntryFocused="MyIllnessDetailView_EntryFocused"  Grid.Row="1" />
+                                <Button IsVisible="{Binding ShowDosageDetail, Mode=TwoWay}" Grid.Row="2" Style="{StaticResource AddButton}" CommandParameter="{Binding .}"
+                                        Command="{Binding BindingContext.AddItemCommand, Source={RelativeSource AncestorType={x:Type controls:MyIllnessCollectionView}}}" />
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentView.Content>
+</ContentView>

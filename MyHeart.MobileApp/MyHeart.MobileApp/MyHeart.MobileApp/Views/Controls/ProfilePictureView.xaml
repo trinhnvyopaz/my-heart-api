@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.Controls.ProfilePictureView">
+  <ContentView.Content>
+        <Frame HeightRequest="40" WidthRequest="40" Padding="0" Margin="0" HasShadow="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="20" 
+               IsClippedToBounds="True" BackgroundColor="Transparent">
+            <ImageButton Command="{Binding GoToProfilePageCommand}" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand" Source="userprofile.png"  />
+        </Frame>
+    </ContentView.Content>
+</ContentView>

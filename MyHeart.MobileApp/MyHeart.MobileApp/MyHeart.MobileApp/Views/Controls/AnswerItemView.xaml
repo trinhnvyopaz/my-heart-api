@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.Controls.AnswerItemView">
+    <ContentView.GestureRecognizers>
+        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+    </ContentView.GestureRecognizers>
+  <ContentView.Content>
+        <Frame Style="{StaticResource CardStyle}" Padding="10" x:Name="MainLayout">
+            <Grid ColumnDefinitions="Auto, .9*">
+                <StackLayout WidthRequest="36" HeightRequest="35">
+                    <Image WidthRequest="35" HeightRequest="35" Source="checkbox.png" x:Name="CheckedImage" IsVisible="False"  />
+                    <Ellipse WidthRequest="36" HeightRequest="35" Margin="0" x:Name="UncheckdFrame" Fill="Transparent" Stroke="{StaticResource SecondaryColor}" />
+
+
+                </StackLayout>
+               
+                <Label HorizontalOptions="StartAndExpand" x:Name="TitleLabel" Grid.Column="1" />
+            </Grid>
+        </Frame>
+  </ContentView.Content>
+</ContentView>

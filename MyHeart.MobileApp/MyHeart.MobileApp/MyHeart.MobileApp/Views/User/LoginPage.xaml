@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels"
+             xmlns:biometric="clr-namespace:Plugin.Fingerprint.Abstractions;assembly=Plugin.Fingerprint"
+             x:Class="MyHeart.MobileApp.Views.LoginPage"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             NavigationPage.HasNavigationBar="False" BackgroundColor="{StaticResource BackgroundColor}"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers" xmlns:effects="clr-namespace:MyHeart.MobileApp.Utils.Effects" xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls" 
+             xmlns:dxe="http://schemas.devexpress.com/xamarin/2014/forms/editors"
+             x:DataType="{x:Type vm:LoginPageViewModel}">
+    <ContentPage.BindingContext>
+        <vm:LoginPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+        <converters:AndMultiConverter x:Key="AndMultiConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Margin="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Text="My HEART" Grid.Row="1" Style="{StaticResource MainTitle}" HorizontalOptions="CenterAndExpand" />
+
+            <ActivityIndicator Grid.Row="2" VerticalOptions="CenterAndExpand" Color="{StaticResource MainColor}" IsRunning="true" IsVisible="{Binding IsBusy}" />
+
+            <StackLayout VerticalOptions="CenterAndExpand" Grid.Row="3" Grid.RowSpan="2">
+                <controls:FormInputView Title="Uživatelské jméno" Text="{Binding Login.Username}" Keyboard="Email"/>
+                <controls:FormInputView IsPassword="True" Title="Heslo" Text="{Binding Login.Password}" />
+                <controls:FormInputView Title="MFA kód" Text="{Binding Login.MfaCode}" IsVisible="{Binding MfaNeeded}" />
+            </StackLayout>
+
+            <Label Grid.Row="5" IsVisible="{Binding Login.IsValid, Converter={StaticResource NegateBoolConverter}}" Text="{Binding Login.InvalidMessage, UpdateSourceEventName=Unfocused}" TextColor="{StaticResource MainColor}" FontSize="Small" />
+            <StackLayout Grid.Row="6" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="20" Margin="0,0, 10, 0">
+              
+                <ImageButton Source="fingerprint.png" HeightRequest="32"  BackgroundColor="Transparent" Command="{Binding BiometricAutheticationCommand}">
+                    <ImageButton.Triggers>
+                        <DataTrigger TargetType="{x:Type ImageButton}" Binding="{Binding BiometricType}" Value="{x:Static biometric:AuthenticationType.Face}">
+                            <Setter Property="Source" Value="faceid.png" />
+                        </DataTrigger>
+                    </ImageButton.Triggers>
+                    <ImageButton.IsVisible>
+                        <MultiBinding Converter="{StaticResource AndMultiConverter}">
+                            <Binding Path="ShowBiometricAuthetication" />
+                            <Binding Path="IsSigningViaBiometrics" Converter="{StaticResource NegateBoolConverter}" />
+                            <Binding Path="MfaNeeded" Converter="{StaticResource NegateBoolConverter}" />
+                        </MultiBinding>
+                    </ImageButton.IsVisible>
+                </ImageButton>
+            </StackLayout>
+
+            <Button Grid.Row="7" Text="Přihlásit" Command="{Binding SignInCommand}" Style="{StaticResource ActionButton}" />
+            <Button Grid.Row="9" Text="Registrovat" Command="{Binding GoToRegistration}" Style="{StaticResource ActionButton}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

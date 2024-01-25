@@ -1,0 +1,363 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DebugType>portable</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<SharedImage Include="Resources/Icons/qrcode.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/documents.svg" BaseSize="25,25" />
+		<SharedImage Include="Resources/Icons/fingerprint.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/group.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/healthstatus.svg" BaseSize="25,25" />
+		<SharedImage Include="Resources/Icons/questions.svg" BaseSize="25,25" />
+		<SharedImage Include="Resources/Icons/recomendation.svg" BaseSize="25,25" />
+		<SharedImage Include="Resources/Icons/anamnesis.svg" BaseSize="25,25" />
+		<SharedImage Include="Resources/Icons/featherbell.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/rightarrow.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/caution.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/disease.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/healthcare.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/hypoallergenic.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/performance.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/user.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/close.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/userprofile.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/hourglass.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/done.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/backbutton.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/checkbox.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/failed.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/barcodescanner.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/camera.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/pdficon.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/coloruser.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/news.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/notification.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/addcircle.svg" BaseSize="40,40" />
+		<SharedImage Include="Resources/Icons/illustrationdocuments.svg" BaseSize="315,230" />
+		<SharedImage Include="Resources/Icons/icondocument.svg" BaseSize="40,40" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="Resources\Fonts\Font Awesome 5 Free-Solid-900.otf" />
+		<None Remove="Resources\Fonts\materialdesignicons-webfont.ttf" />
+		<None Remove="Resources\Fonts\Nunito-Bold.ttf" />
+		<None Remove="Resources\Fonts\Nunito-ExtraBold.ttf" />
+		<None Remove="Resources\Fonts\Nunito-Regular.ttf" />
+		<None Remove="Resources\Icons\rightarrow.svg" />
+		<None Remove="Resources\Images\faceid.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Fonts\Font Awesome 5 Free-Solid-900.otf" />
+		<EmbeddedResource Include="Resources\Fonts\materialdesignicons-webfont.ttf" />
+		<EmbeddedResource Include="Resources\Fonts\Nunito-Bold.ttf" />
+		<EmbeddedResource Include="Resources\Fonts\Nunito-ExtraBold.ttf" />
+		<EmbeddedResource Include="Resources\Fonts\Nunito-Regular.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DevExpress.XamarinForms.Charts" Version="22.1.7" />
+		<PackageReference Include="DevExpress.XamarinForms.Editors" Version="22.1.7" />
+		<PackageReference Include="DevExpress.XamarinForms.Navigation" Version="22.1.7" />
+		<PackageReference Include="Microsoft.AppCenter.Analytics" Version="5.0.1" />
+		<PackageReference Include="Microsoft.AppCenter.Crashes" Version="5.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.4" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Plugin.Fingerprint" Version="2.1.5" />
+		<PackageReference Include="Plugin.FirebasePushNotification" Version="3.4.35" />
+		<PackageReference Include="Plugin.LocalNotification" Version="10.1.8" />
+		<PackageReference Include="Plugin.Permissions" Version="6.0.1" />
+		<PackageReference Include="Refit" Version="6.3.2" />
+		<PackageReference Include="Resizetizer.NT" Version="0.3.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
+		<PackageReference Include="Xamarin.Build.Download" Version="0.11.4" />
+		<PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.5" />
+		<PackageReference Include="Xamarin.CommunityToolkit.Markup" Version="2.0.5" />
+		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
+		<PackageReference Include="Xamarin.Forms.InputKit" Version="4.1.6" />
+		<PackageReference Include="Xamarin.MediaGallery" Version="2.2.1" />
+		<PackageReference Include="Xamarin.MediaGallery.Permision" Version="2.2.1" />
+		<PackageReference Include="ZXing.Net.Mobile.Forms" Version="3.1.0-beta2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\MyHeart.DTO\MyHeart.DTO.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <SharedFont Include="Resources\Icons\rightarrow.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Views\Controls\FormEditorInputView.xaml.cs">
+		  <DependentUpon>FormEditorInputView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Controls\FormTimeInputView.xaml.cs">
+		  <DependentUpon>FormTimeInputView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Controls\FormDateInputView.xaml.cs">
+		  <DependentUpon>FormDateInputView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Controls\MainHeaderVIew.xaml.cs">
+		  <DependentUpon>MainHeaderView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Controls\MyIllnessDetailView.xaml.cs">
+			<DependentUpon>MyIllnessDetailView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Controls\MyTreatmentDetailView.xaml.cs">
+			<DependentUpon>MyTreatmentDetailView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Controls\NewsletterSelectionView.xaml.cs">
+			<DependentUpon>NewsletterSelectionView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Controls\NonPharmacyCollectionVIew.xaml.cs">
+			<DependentUpon>NonPharmacyCollectionView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Controls\NonPharmacyDetailView.xaml.cs">
+			<DependentUpon>NonPharmacyDetailView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Controls\QuestionaireNextButtonView.xaml.cs">
+		  <DependentUpon>QuestionaireNextButtonView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\MyAnamnesis\AnamnesisAddPage.xaml.cs">
+			<DependentUpon>AnamnesisAddPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\MyAnamnesis\MyAllergy\MyAllergyListPage.xaml.cs">
+		  <DependentUpon>MyAllergyListPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\MyAnamnesis\MyRiskFactors\MyRiskFactorDetailPage.xaml.cs">
+			<DependentUpon>MyRiskFactorDetailPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\MyAnamnesis\NonPharmaticTherapy\MyNonpharmaticTherapyListPage.xaml.cs">
+		  <DependentUpon>MyNonpharmaticTherapyListPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\MyReports\ReportDetailPage.xaml.cs">
+			<DependentUpon>ReportDetailPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\MyReports\ReportUpdatePage.xaml.cs">
+			<DependentUpon>ReportUpdatePage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\PopUp\PhysicalActivityPopUp.xaml.cs">
+		  <DependentUpon>PhysicalActivityPopUp.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\PopUp\SmokerPopUp.xaml.cs">
+		  <DependentUpon>SmokerPopUp.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\PopUp\PersonalAnamnesisPopUp.xaml.cs">
+		  <DependentUpon>PersonalAnamnesisPopUp.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\RecommandationsPage.xaml.cs">
+		  <DependentUpon>RecommandationsPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Dashboard\PersonalAnamnesisDetailVIew.xaml.cs">
+			<DependentUpon>PersonalAnamnesisDetailView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Questionnaire\PickSymptomView.xaml.cs">
+			<DependentUpon>PickSymptomView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Controls\DoctorDetailView.xaml.cs">
+		  <DependentUpon>DoctorDetailView.xaml</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Views\AddUserAnamnesisPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\AlergyDetailView.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\AnswerItemView.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\CardViewHeader.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\CardViewItem.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\FormInputView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\IconButtonView.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\MainHeaderView.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\MyIllnessCollectionView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\MyTreatmentCollectionView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\NonPharmacyCollectionView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\ProfilePictureView.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\QuestionaireNextButtonView.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\ReportCardView.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\SearchBarView.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\TitleHeader.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyAnamnesis\AnamnesisAddPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyAnamnesis\AnamnesisCardView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyAnamnesis\MyAllergy\MyAllergyListPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyAnamnesis\MyAllergy\CreateAllergyPopUp.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyAnamnesis\MyIllness\MyIllnessListPage.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyAnamnesis\MyRiskFactors\MyRiskFactorDetailPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyAnamnesis\MyTreatmentListPage.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyAnamnesis\NonPharmaticTherapy\MyNonpharmaticTherapyListPage.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyQuestion\ChatPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\DashboardCardView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\MyIllnessDetailView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\MyTreatmentDetailView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\NewsletterSelectionView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\NonPharmacyDetailView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\QuestionCardView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Dashboard\DashboardPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyQuestion\NewQuestionPage.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyReports\ReportAddFilePage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyReports\ReportAddInfoPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Questionnaire\DiseasesResultView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Questionnaire\PickSymptomView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Questionnaire\QuestionaireResultView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Questionnaire\QuestionView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Controls\DoctorDetailView.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\User\LoginPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyAnamnesis\MyAnamnesisPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyAnamnesis\AnamnesisDetailPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyAnamnesis\Physical\PhysicalPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyQuestion\MyQuestionsPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyReports\MyReportsPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyTreatmentsDetailPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyTreatmentsPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\RecommandationsPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\NonpharmaticTherapyPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Dashboard\PersonalAnamnesisDetailView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\PopUp\PersonalAnamnesisPopUp.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\User\NewsDetailPage.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\User\NotificationSubscriptionPage.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\User\ProfilePage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\User\RegistrationPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyReports\ReportDetailPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyReports\ReportUpdatePage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\MyQuestion\VideoPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\User\UserMenuItemView.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\User\UserMenuPage.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\User\UserNotificationPage.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+	</ItemGroup>
+</Project>

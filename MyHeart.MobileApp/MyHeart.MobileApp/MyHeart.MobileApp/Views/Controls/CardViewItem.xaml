@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             x:Class="MyHeart.MobileApp.Views.Controls.CardViewItem">
+    <ContentView.Resources>
+        <Style TargetType="{x:Type Frame}" x:Key="AnamnesisCardStyle">
+            <Setter Property="BorderColor" Value="#f2f2f2" />
+            <Setter Property="HasShadow" Value="False" />
+            <Setter Property="CornerRadius" Value="20"/>
+        </Style>
+        <Style TargetType="{x:Type Label}" x:Key="TitleStyle">
+            <Setter Property="FontFamily" Value="{StaticResource NunitoRegularFont}"/>
+            <Setter Property="TextColor" Value="{StaticResource RegulatFontColor}"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+        <Style TargetType="{x:Type Label}" x:Key="ValueStyle">
+            <Setter Property="FontFamily" Value="{StaticResource NunitoBoldFont}"/>
+            <Setter Property="TextColor" Value="#2D2957"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+        <converters:CollectionItemIsLastConverter x:Key="CollectionItemIsLastConverter" />
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid RowSpacing="0" RowDefinitions="Auto,Auto">
+            <StackLayout HeightRequest="40" Orientation="Horizontal">
+                <Label x:Name="TitleLabel" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" Style="{StaticResource TitleStyle}" />
+                <Label x:Name="ValueLabel" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand" Style="{StaticResource ValueStyle}"  />
+            </StackLayout>
+            <!--<BoxView Style="{StaticResource Separator}" IsVisible="{Binding IsLastRow, Converter={StaticResource NegateBoolConverter}}" />-->
+        </Grid>
+    </ContentView.Content>
+</ContentView>

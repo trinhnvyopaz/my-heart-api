@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.MyTreatmentsDetailPage"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             xmlns:view="clr-namespace:MyHeart.MobileApp.Views"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             Title="Detail léčby">
+    <ContentPage.Content>
+        <Frame Margin="10" VerticalOptions="CenterAndExpand">
+            <StackLayout>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" Text="Detail léčby" Style="{StaticResource HeaderLabelStyle}" FontSize="Title"/>
+                    <ImageButton Command="{Binding SaveCommand}" CommandParameter="{Binding .}" BackgroundColor="{StaticResource MainColor}" Grid.Column="1">
+                        <ImageButton.Source>
+                            <FontImageSource Color="White" Glyph="{x:Static helpers:IconFont.Check}" FontFamily="MaterialIconFont" />
+                        </ImageButton.Source>
+                    </ImageButton>
+                </Grid>
+
+                <controls:MyTreatmentDetailView BindingContext="{Binding Item}" />
+                <Button Style="{StaticResource MediumButton}" Text="Zpět" Command="{Binding GoBackCommand}" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+        </Frame>
+
+    </ContentPage.Content>
+</ContentPage>

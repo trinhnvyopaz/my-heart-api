@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.NonpharmaticTherapyPage"
+             Title="Provedené výkony"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             xmlns:dto="clr-namespace:MyHeart.DTO;assembly=MyHeart.DTO"
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             xmlns:view="clr-namespace:MyHeart.MobileApp.Views"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             x:DataType="{x:Type vm:NonpharmaticTherapyCardViewModel}">
+    <ContentPage.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter"/>
+    </ContentPage.Resources>
+    <StackLayout Spacing="0">
+        <ActivityIndicator Color="{StaticResource MainColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+        <RefreshView IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" Command="{Binding RefreshCommand}"
+                     BackgroundColor="Transparent" RefreshColor="Transparent" IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+            <CollectionView Margin="10" ItemsSource="{Binding Items}">
+                <CollectionView.EmptyViewTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="No data available" />
+                        </ViewCell>
+                    </DataTemplate>
+                </CollectionView.EmptyViewTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type dto:UserNonpharmacyDto}">
+                        <StackLayout>
+                            <Frame Margin="5">
+                                <Grid RowDefinitions="Auto, *">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource Mode=FindAncestor,AncestorType={x:Type view:NonpharmaticTherapyPage}}}" />
+                                    </Grid.GestureRecognizers>
+                                    <controls:NonPharmacyDetailView Grid.RowSpan="2"/>
+                                    <ImageButton HorizontalOptions="EndAndExpand" Command="{Binding BindingContext.DeleteItemCommand, Source={RelativeSource Mode=FindAncestor,AncestorType={x:Type view:NonpharmaticTherapyPage}}}"
+                                             CommandParameter="{Binding .}" Grid.Row="6" BackgroundColor="{StaticResource MainColor}">
+                                        <ImageButton.Source>
+                                            <FontImageSource FontFamily="MaterialIconFont" Glyph="{x:Static helpers:IconFont.Delete}" Color="{StaticResource LightFontColor}" />
+                                        </ImageButton.Source>
+                                    </ImageButton>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        <Button Margin="0,0,0,5" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Přidat" CornerRadius="5" IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}"
+                Style="{StaticResource MediumButton}" Command="{Binding GoToAddItemCommand}"/>
+    </StackLayout>
+</ContentPage>

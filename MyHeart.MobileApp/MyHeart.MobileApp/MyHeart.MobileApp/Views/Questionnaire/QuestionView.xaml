@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<questionnaire:BaseQuestionaireStepView xmlns:questionnaire="clr-namespace:MyHeart.MobileApp.Views.Questionnaire"
+                                    xmlns="http://xamarin.com/schemas/2014/forms" 
+                                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                                    x:Class="MyHeart.MobileApp.Views.Questionnaire.QuestionView"
+                                    xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels.Questionnaire"
+                                    x:DataType="{x:Type vm:QuestionnairePageViewModel}"
+                                    xmlns:dto="clr-namespace:MyHeart.DTO.ProfessionalInformation;assembly=MyHeart.DTO" xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls" xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters">
+    <questionnaire:BaseQuestionaireStepView.Resources>
+
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+        <converters:AddNumberConverter x:Key="AddNumberConverter" />
+        <converters:ProgressbarMultiConverter x:Key="ProgressbarMultiConverter" />
+    </questionnaire:BaseQuestionaireStepView.Resources>
+    <questionnaire:BaseQuestionaireStepView.Content>
+        <Grid Margin="10" RowDefinitions="Auto, Auto, 2*, Auto">
+            <Label Text="Prosím, odpovězte na následující&#10;otázky." Grid.Row="0" Style="{StaticResource QuestionaireTitleLabelStyle}" />
+            <Grid Margin="0, 8, 0, 0" Grid.Row="1" RowDefinitions="*,Auto" RowSpacing="0">
+                <Label Text="Otázky" HorizontalOptions="StartAndExpand" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="5">
+                    <Label Text="{Binding CurrentQuestionPosition, Converter={StaticResource AddNumberConverter}, ConverterParameter=1}" />
+                    <Label Text="z" />
+                    <Label Text="{Binding Questions.Count}" />
+                </StackLayout>
+                <ProgressBar  Grid.Row="1" ProgressColor="{StaticResource ProgressColor}">
+
+                </ProgressBar>
+            </Grid>
+           
+            <ActivityIndicator Grid.Row="1" IsVisible="{Binding IsBusy}" Grid.RowSpan="2"
+                               IsRunning="True" HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"/>
+
+            <StackLayout BackgroundColor="AliceBlue" Grid.Row="2" VerticalOptions="FillAndExpand">
+                <CarouselView VerticalOptions="CenterAndExpand" IsSwipeEnabled="False" IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" 
+                              PositionChanged="QuestionCarousel_PositionChanged" x:Name="QuestionCarousel" ItemsSource="{Binding Questions}" 
+                              CurrentItem="{Binding CurrentQuestion}" Position="{Binding CurrentQuestionPosition}">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate x:DataType="{x:Type vm:QuestionaireSymtomQuestionViewModel}">
+                            <StackLayout>
+                                <controls:AutoHeigthWebView HeightRequest="38">
+                                    <controls:AutoHeigthWebView.Source>
+                                        <HtmlWebViewSource Html="{Binding SymptomQuestion.Text}" />
+                                    </controls:AutoHeigthWebView.Source>
+                                </controls:AutoHeigthWebView>
+                                <controls:AnswerItemView IsChecked="{Binding Approved}" Title="Ano" />
+                                <controls:AnswerItemView IsChecked="{Binding Approved, Converter={StaticResource NegateBoolConverter}}" Title="Ne" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+            </StackLayout>
+
+
+            <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" Orientation="Horizontal" Grid.Row="3">
+                <Button Style="{StaticResource QuestionBackButtonStyle}" Command="{Binding GoBackCommand}" />
+                <controls:QuestionaireNextButtonView ActionCommand="{Binding ProcessQuestionCommad}" />
+
+            </StackLayout>
+        </Grid>
+    </questionnaire:BaseQuestionaireStepView.Content>
+</questionnaire:BaseQuestionaireStepView>

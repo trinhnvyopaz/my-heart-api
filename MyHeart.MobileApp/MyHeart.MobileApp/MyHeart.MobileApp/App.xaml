@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             mc:Ignorable="d"
+             x:Class="MyHeart.MobileApp.App">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--Global Styles-->
+            <Color x:Key="MainColor">#EA4444</Color>
+            <Color x:Key="SecondaryColor">#0666EB</Color>
+            <Color x:Key="BackgroundColor">#F2F2F2</Color>
+            <Color x:Key="LightFontColor">#FFF</Color>
+            <Color x:Key="DarkFontColor">#47474A</Color>
+            <Color x:Key="RegulatFontColor">#707070</Color>
+            <Color x:Key="GreyFontColor">#829191</Color>
+            <Color x:Key="LightGreyFontColor">#B1AFC3</Color>
+            <Color x:Key="DarkGreyFontColor">#97989D</Color>
+            <Color x:Key="ProgressColor">#4CAF50</Color>
+            <Color x:Key="NavigationPrimary">#363636</Color>
+            <Color x:Key="SuccessColor">#5DD64F</Color>
+            <Color x:Key="ErrorColor">#EE6767</Color>
+            <Color x:Key="WarningColor">#FFB050</Color>
+            <Color x:Key="MediumGreyFont">#7C7C84</Color>
+
+            <x:String x:Key="NunitoBoldFont">NunitoBold</x:String>
+            <x:String x:Key="NunitoExtraBoldFont">NunitoExtraBold</x:String>
+            <x:String x:Key="NunitoRegularFont">NunitoRegular</x:String>
+            <x:String x:Key="NunitoSemiBoldFont">NunitoSemiBold</x:String>
+            <x:String x:Key="WorkSansMediumFont">WorkSansMedium</x:String>
+            <x:String x:Key="NunitoBlackFont">NunitoBlack</x:String>
+            <x:String x:Key="MaterialIconFont">MaterialIconFont</x:String>
+
+            <Style TargetType="{x:Type Label}" x:Key="InputTitle">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontFamily" Value="{StaticResource NunitoRegularFont}"/>
+                <Setter Property="TextColor" Value="{StaticResource RegulatFontColor}"/>
+            </Style>
+
+            <Style TargetType="{x:Type Frame}" x:Key="CardStyle">
+                <Setter Property="BorderColor" Value="#f2f2f2" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="CornerRadius" Value="20"/>
+            </Style>
+
+            <Style TargetType="{x:Type BoxView}" x:Key="Separator">
+                <Setter Property="HeightRequest" Value="1"/>
+                <Setter Property="Color" Value="{StaticResource MediumGreyFont}"/>
+                <Setter Property="Opacity" Value="0.15"/>
+                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+            </Style>
+
+
+            <Style TargetType="{x:Type ContentPage}" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}"/>
+            </Style>
+
+            <Style TargetType="{x:Type Label}" x:Key="HeaderLabelStyle">
+                <Setter Property="FontSize" Value="22"/>
+                <Setter Property="FontFamily" Value="{StaticResource NunitoBoldFont}"/>
+                <Setter Property="TextColor" Value="{StaticResource DarkFontColor}" />
+            </Style>
+
+            <Style TargetType="{x:Type Label}" x:Key="QuestionaireNextLabelStyle">
+                <Setter Property="WidthRequest" Value="200"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="19"/>
+                <Setter Property="FontFamily" Value="{StaticResource NunitoExtraBoldFont}"/>
+                <Setter Property="Text" Value="Pokračovat"/>
+            </Style>
+
+            <Style TargetType="{x:Type Frame}" x:Key="InputFrame">
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HeightRequest" Value="40" />
+            </Style>
+
+            <Style x:Key="QuestionBackButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="TextColor" Value="{StaticResource SecondaryColor}"/>
+                <Setter Property="BorderColor" Value="{StaticResource SecondaryColor}"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="Text" Value="Zpět"/>
+                <Setter Property="FontFamily" Value="{StaticResource NunitoExtraBoldFont}"/>
+                <Setter Property="FontSize" Value="19"/>
+                <Setter Property="WidthRequest" Value="95"/>
+                <Setter Property="CornerRadius" Value="30" />
+            </Style>
+
+
+            <Style TargetType="{x:Type Label}" x:Key="SubtitleLabelStyle">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontFamily" Value="{StaticResource NunitoBoldFont}"/>
+                <Setter Property="TextColor" Value="{StaticResource SecondaryColor}" />
+            </Style>
+
+            <Style TargetType="{x:Type Label}" x:Key="RegularLabelStyle">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontFamily" Value="{StaticResource NunitoRegularFont}"/>
+                <Setter Property="TextColor" Value="#28282B" />
+            </Style>
+
+            <Style TargetType="{x:Type ImageButton}" x:Key="RightArrowButtonStyle">
+                <Setter Property="HeightRequest" Value="9.15" />
+                <Setter Property="WidthRequest" Value="11" />
+                <Setter Property="Source" Value="rightarrow.png" />
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="BarTextColor" Value="White" />
+            </Style>
+
+            <Style x:Key="BaseButton" TargetType="{x:Type Button}">
+                <Setter Property="BackgroundColor" Value="{StaticResource MainColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource LightFontColor}"/>
+            </Style>
+
+            <Style x:Key="MediumButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButton}">
+                <Setter Property="WidthRequest" Value="100"/>
+            </Style>
+
+            <Style x:Key="ValidationLabelStyle" TargetType="{x:Type Label}">
+                <Style.Triggers>
+                    <DataTrigger TargetType="{x:Type Label}" Binding="{Binding Source={RelativeSource Self}, Path=Text, TargetNullValue=''}" Value="">
+                        <Setter Property="IsVisible" Value="False"/>
+                    </DataTrigger>
+                </Style.Triggers>
+                <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="TextColor" Value="{StaticResource ErrorColor}"/>
+            </Style>
+
+            <Style x:Key="QuestionaireTitleLabelStyle" TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="21" />
+                <Setter Property="TextColor" Value="{StaticResource DarkFontColor}" />
+                <Setter Property="FontFamily" Value="{StaticResource NunitoBoldFont}" />
+            </Style>
+
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+
+            <Style TargetType="{x:Type Label}" x:Key="MainTitle">
+                <Setter Property="TextColor" Value="{StaticResource MainColor}"/>
+                <Setter Property="FontSize" Value="34" />
+                <Setter Property="FontFamily" Value="{StaticResource NunitoRegularFont}" />
+            </Style>
+
+            <Style TargetType="{x:Type Button}" x:Key="ActionButton">
+                <Setter Property="WidthRequest" Value="203"/>
+                <Setter Property="HeightRequest" Value="43"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource SecondaryColor}"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="CornerRadius" Value="22"/>
+                <Setter Property="FontFamily" Value="{StaticResource NunitoExtraBoldFont}"/>
+                <Setter Property="FontSize" Value="17" />
+            </Style>
+
+            <Style TargetType="{x:Type Button}" x:Key="InverseActionButton">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="BorderColor" Value="{StaticResource SecondaryColor}"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="WidthRequest" Value="203"/>
+                <Setter Property="HeightRequest" Value="43"/>
+                <Setter Property="TextColor" Value="{StaticResource SecondaryColor}"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="CornerRadius" Value="23"/>
+                <Setter Property="FontFamily" Value="{StaticResource NunitoExtraBoldFont}"/>
+                <Setter Property="FontSize" Value="17" />
+            </Style>
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource InverseActionButton}" x:Key="ErrorInverseActionButton">
+                <Setter Property="BorderColor" Value="{StaticResource MainColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource MainColor}"/>
+            </Style>
+            <Style TargetType="{x:Type ImageButton}">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+            <Style TargetType="{x:Type Button}" x:Key="CloseButton">
+                <Setter Property="BorderColor" Value="#545871" />
+                <Setter Property="WidthRequest" Value="40" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="BorderWidth" Value=".5" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="#545871" />
+                <Setter Property="ImageSource">
+                    <Setter.Value>
+                        <FontImageSource FontFamily="{StaticResource MaterialIconFont}" Glyph="{x:Static helpers:IconFont.Close}" Color="#545871"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type Frame}" x:Key="DetailCardView">
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="Margin" Value="0,0,0,10" />
+                <Setter Property="Padding" Value="16,7" />
+                <Setter Property="CornerRadius" Value="10" />
+            </Style>
+
+            <Style TargetType="{x:Type Button}" x:Key="AddButton">
+                <Setter Property="WidthRequest" Value="110"/>
+                <Setter Property="Text" Value="+  Přidat"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="Margin" Value="0,10,0,5"/>
+                <Setter Property="CornerRadius" Value="23"/>
+                <Setter Property="FontFamily" Value="{StaticResource NunitoBlackFont}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource SecondaryColor}"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+
+            <Style TargetType="{x:Type ImageButton}" x:Key="NotificationPicture">
+                <Setter Property="HeightRequest" Value="24" />
+                <Setter Property="WidthRequest" Value="24" />
+                <Setter Property="Source" Value="featherbell.png"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+            <Style TargetType="{x:Type Switch}" x:Key="BaseSwitch">
+                <Setter Property="ThumbColor" Value="White"/>
+                <Setter Property="OnColor" Value="{StaticResource SecondaryColor}"/>
+            </Style>
+            <Style TargetType="{x:Type ImageButton}" x:Key="AddCircleButton">
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="WidthRequest" Value="50"/>
+                <Setter Property="Source">
+                    <Setter.Value>
+                        <FontImageSource FontFamily="{StaticResource MaterialIconFont}" Glyph="{x:Static helpers:IconFont.PlusCircle}" Color="{StaticResource SecondaryColor}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>

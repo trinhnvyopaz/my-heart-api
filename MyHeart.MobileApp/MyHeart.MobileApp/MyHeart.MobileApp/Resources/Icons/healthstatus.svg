@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24.158" viewBox="0 0 24 24.158">
+  <g id="icon_zdravotni_stav" data-name="icon zdravotni stav" transform="translate(-33 -5)">
+    <rect id="Rectangle_2861" data-name="Rectangle 2861" width="24" height="24" transform="translate(33 5)" fill="none"/>
+    <g id="icon_zdravotni_stav-2" data-name="icon zdravotni stav">
+      <path id="Path_2645" data-name="Path 2645" d="M93.986,19.5v6.016a5.549,5.549,0,0,1-11.1,0v-2.13a4.964,4.964,0,0,1-4.3-4.9v-3.8l-.741-.741a3.724,3.724,0,0,1,5.266-5.266l.422.421.422-.421a3.724,3.724,0,0,1,5.266,5.266l-.743.741v3.8a4.964,4.964,0,0,1-4.3,4.9v2.13a4.259,4.259,0,0,0,8.519,0V19.5a2.311,2.311,0,1,1,1.289,0ZM79.877,15.978v2.505a3.656,3.656,0,0,0,7.313,0v-2.51l-2.814,2.815a1.129,1.129,0,0,1-1.679,0c-.958-.946-1.886-1.876-2.819-2.812Z" transform="translate(-40.76 -2.007)" fill="#0666eb" stroke="#0666eb" stroke-width="0.2"/>
+      <rect id="Rectangle_2861-2" data-name="Rectangle 2861" width="24" height="24" transform="translate(33 5)" fill="none"/>
+    </g>
+  </g>
+</svg>

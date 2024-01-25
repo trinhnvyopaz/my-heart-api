@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             xmlns:dto="clr-namespace:MyHeart.DTO.User;assembly=MyHeart.DTO"
+             xmlns:view="clr-namespace:MyHeart.MobileApp.Views"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             x:Class="MyHeart.MobileApp.Views.MyTreatmentsPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             Title="Moje léčby">
+    <ContentPage.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+    </ContentPage.Resources>
+    <StackLayout Spacing="0">
+        <ActivityIndicator Color="{StaticResource MainColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+        <RefreshView IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" Command="{Binding RefreshCommand}"
+                     BackgroundColor="Transparent" RefreshColor="Transparent" IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+            <CollectionView Margin="5" VerticalOptions="FillAndExpand" ItemsSource="{Binding UserAnamneses}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type dto:UserAnamnesisDTO}">
+                        <StackLayout>
+                            <Frame Margin="5">
+                                <StackLayout>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" Text="Název" Style="{StaticResource HeaderLabelStyle}"/>
+                                        <ImageButton Command="{Binding BindingContext.DeleteItemCommand, Source={RelativeSource Mode=FindAncestor,AncestorType={x:Type view:MyTreatmentsPage}}}"
+                                             CommandParameter="{Binding .}" BackgroundColor="{StaticResource MainColor}" WidthRequest="40" HorizontalOptions="EndAndExpand">
+                                            <ImageButton.Source>
+                                                <FontImageSource FontFamily="MaterialIconFont" Glyph="{x:Static helpers:IconFont.Delete}" Color="{StaticResource LightFontColor}" />
+                                            </ImageButton.Source>
+                                        </ImageButton>
+                                    </StackLayout>
+
+                                    <Label FontSize="Subtitle" Text="{Binding IsPharmacy_Name}"/>
+
+                                    <Label Text="Dávkování" Style="{StaticResource HeaderLabelStyle}"/>
+                                    <Label FontSize="Subtitle" Text="{Binding IsPharmacy_Dose}"/>
+
+                                    <Label Text="Ráno" Style="{StaticResource HeaderLabelStyle}"/>
+                                    <Entry Text="{Binding IsPharmacy_MorningDose}" />
+
+                                    <Label Text="Odpoledne" Style="{StaticResource HeaderLabelStyle}"/>
+                                    <Entry Text="{Binding IsPharmacy_AfternoonDose}" />
+
+                                    <Label Text="Večer" Style="{StaticResource HeaderLabelStyle}"/>
+                                    <Entry Text="{Binding IsPharmacy_EveningDose}" />
+
+                                    <Label Text="Poznámka" Style="{StaticResource HeaderLabelStyle}"/>
+                                    <Editor AutoSize="TextChanges" Text="{Binding IsPharmacy_Note}" />
+
+
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        <Button Margin="0,0,0,5" HorizontalOptions="CenterAndExpand" Text="Přidat" CornerRadius="5" IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}"
+                 Command="{Binding GoToAddItemPageCommand}" Style="{StaticResource MediumButton}"/>
+
+    </StackLayout>
+</ContentPage>

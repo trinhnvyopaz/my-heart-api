@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             Title="Anamnéza"
+             xmlns:view="clr-namespace:MyHeart.MobileApp.Views.MyAnamnesis" xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             x:Class="MyHeart.MobileApp.Views.MyAnamnesisPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:effects="clr-namespace:MyHeart.MobileApp.Utils.Effects" xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             ios:Page.UseSafeArea="True" BackgroundColor="{StaticResource BackgroundColor}"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding GoToProfilePageCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="{x:Static helpers:IconFont.Account}" FontFamily="MaterialIconFont" Color="{StaticResource LightFontColor}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.BindingContext>
+        <vm:MyAnamnesisViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="{x:Type view:AnamnesisCardView}">
+            <Setter Property="Margin" Value="8" />
+        </Style>
+        <converters:BoolToStringConverter x:Key="BoolToStringConverter" TrueValue="Ano" FalseValue="Ne"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="0">
+                <controls:MainHeaderView Title="Anamnéza" />
+                <view:AnamnesisCardView BindingContext="{Binding MyThreatmentsVm}" Title="Léčba" Icon="healthcare.png" />
+                <view:AnamnesisCardView BindingContext="{Binding MyIllnessCardVm}" Title="Onemocnění" Icon="disease.png" />
+                <view:AnamnesisCardView BindingContext="{Binding MyAllergyCardVm}" Title="Moje alergie" Icon="hypoallergenic.png" />
+                <view:AnamnesisCardView BindingContext="{Binding MyRiskFactorCardVm}" Title="Rizikové faktory" Icon="caution.png" />
+                <view:AnamnesisCardView BindingContext="{Binding NonpharmaticTherapyVm}" Title="Provedené výkony" Icon="performance.png" />
+                <!--<view:AnamnesisCardView BindingContext="{Binding PhysicalCardVm}" Title="Fyzikální vyšetření" Icon="performance.png" />-->
+                
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

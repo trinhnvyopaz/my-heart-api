@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Přidejte dodatočné informace"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             x:Class="MyHeart.MobileApp.Views.MyReports.ReportAddInfoPage"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views.MyReports" 
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters" 
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls" 
+             xmlns:effects="clr-namespace:MyHeart.MobileApp.Utils.Effects" 
+             xmlns:editors="http://schemas.devexpress.com/xamarin/2014/forms/editors">
+    <ContentPage.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+            <ScrollView IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto, Auto, *" VerticalOptions="FillAndExpand">
+                    <ActivityIndicator Grid.RowSpan="6" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsRunning="True" IsVisible="{Binding IsBusy}"/>
+                    <controls:FormInputView Grid.Row="0" Title="Nadpis" Text="{Binding Title}" Placeholder="Sem napište nadpis"/>
+                    <controls:FormDateInputView Grid.Row="1" Title="Datum vyhotovení" Date="{Binding CreationDate}"/>
+
+                    <!--Type of report-->
+                    <StackLayout Grid.Row="2" Orientation="Vertical">
+                        <Label Text="Typ:" Style="{StaticResource InputTitle}"
+                               HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <Frame Padding="5,0" Style="{StaticResource InputFrame}">
+                            <Picker x:Name="typePicker" ItemsSource="{Binding TypeSource}"
+                                        SelectedItem="{Binding SelectedType}"
+                                        HorizontalTextAlignment="Start"
+                                        WidthRequest="170">
+                                <Picker.Effects>
+                                    <effects:NoDetaultBorderEffectiOS/>
+                                    <effects:NoUnderlineEffect/>
+                                </Picker.Effects>
+                            </Picker>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="3">
+                        <Label Text="Popis" Style="{StaticResource InputTitle}"/>
+                        <Frame HeightRequest="200" Style="{StaticResource InputFrame}">
+                            <editors:MultilineEdit BorderColor="Transparent"  Text="{Binding Description}" VerticalOptions="StartAndExpand"
+                                               CornerRadius="10" HorizontalOptions="Fill" BoxPadding="10" FocusedBorderColor="Transparent" />
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="4">
+                        <StackLayout Orientation="Horizontal" BackgroundColor="#E5E5E5">
+                            <Label Text="{Binding Name}" Margin="10, 20">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}" Command="{Binding BindingContext.ShowFileCommand, Source={RelativeSource AncestorType={x:Type local:ReportAddInfoPage}}}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                        <Image Source="{Binding ReportFile.ImgSource}" Opacity="1">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.SelectDocumentCommand, Source={RelativeSource AncestorType={x:Type local:ReportAddInfoPage}}}" CommandParameter="{Binding .}" />
+                            </Image.GestureRecognizers>
+                            <Image.Triggers>
+                                <DataTrigger TargetType="{x:Type Image}" Binding="{Binding IsSelected}" Value="True">
+                                    <Setter Property="Opacity" Value="0.6" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="5" Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Button Text="Zrušit" FontAttributes="Bold"
+                                Margin="15" Style="{StaticResource AddButton}"
+                                HorizontalOptions="Center"
+                                Command="{Binding GoBackCommand}"
+                                BackgroundColor="{StaticResource SecondaryColor}"
+                                TextColor="{StaticResource LightFontColor}"/>
+                        <Button Text="Uložit" FontAttributes="Bold"
+                                Margin="15" Style="{StaticResource AddButton}"
+                                HorizontalOptions="Center"
+                                Command="{Binding SaveReportCommand}"
+                                BackgroundColor="{StaticResource SecondaryColor}"
+                                TextColor="{StaticResource LightFontColor}"/>
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             x:Class="MyHeart.MobileApp.Views.Controls.NewsletterSelectionView">
+    
+    <input:RadioButtonGroupView x:Name="RadionButtonView">
+        <input:RadioButton Color="{StaticResource MainColor}" TextFontSize="14" Text="Všechny novinky"/>
+        <input:RadioButton Color="{StaticResource MainColor}" TextFontSize="14" Text="Pouze moje onemocnění"/>
+        <input:RadioButton Color="{StaticResource MainColor}" TextFontSize="14" Text="Nepřeji si dostávat žádné informace"/>
+    </input:RadioButtonGroupView>
+    
+</ContentView>

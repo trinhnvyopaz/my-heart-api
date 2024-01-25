@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Template</title>
+    <base href="~/" />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/dist/main.css" asp-append-version="true" />
+    </environment>
+    <link rel="stylesheet" href="~/dist/main.css" asp-append-version="true" />
+</head>
+<body>
+    @RenderBody()
+
+    <script src="~/dist/vendor.js" asp-append-version="true"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

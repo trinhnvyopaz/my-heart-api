@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels"
+             xmlns:view="clr-namespace:MyHeart.MobileApp.Views"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             x:Class="MyHeart.MobileApp.Views.DashboardPage"
+             Title="Zdravotní stav"   
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"  
+             ios:Page.UseSafeArea="True"             
+             NavigationPage.HasNavigationBar="False"
+             xmlns:enum="clr-namespace:MyHeart.MobileApp.Enums" BackgroundColor="{StaticResource BackgroundColor}"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             x:DataType="{x:Type vm:DashboardPageViewModel}">
+    <ContentPage.BindingContext>
+        <vm:DashboardPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="NavigationButton">
+            <Setter Property="TextColor" Value="{StaticResource LightFontColor}" />
+            <Setter Property="FontSize" Value="19" />
+            <Setter Property="CornerRadius" Value="23" />
+            <Setter Property="HeightRequest" Value="48" />
+            <Setter Property="FontFamily" Value="{StaticResource NunitoBoldFont}" />
+        </Style>
+        <Style TargetType="{x:Type controls:DashboardCardView}">
+            <Setter Property="Color" Value="#FEFFFE"/>
+            <Setter Property="VerticalOptions" Value="StartAndExpand"/>
+        </Style>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+        <converters:BoolToColorConverter x:Key="BoolToColorConverter" TrueColor="{StaticResource MainColor}" FalseColor="{StaticResource SuccessColor}" />
+        <converters:ActivityFrequencyTypeToColorConverter x:Key="ActivityFrequencyTypeToColorConverter" />
+        <converters:BoolToStringConverter x:Key="BoolToStringConverter" TrueValue="Ano" FalseValue="Ne" />
+        <converters:ActivityFrequencyTypeToTextConverter x:Key="ActivityFrequencyTypeToTextConverter" />
+        <converters:ElapsedDaysConverters x:Key="ElapsedDaysConverters" />
+        <converters:DecimalFormatConverter x:Key="DecimalFormatConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto, *">
+            <controls:MainHeaderView Title="Zdravotní stav" />
+            <ActivityIndicator Grid.Row="1" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <ScrollView Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsNotBusy}">
+                <Grid Margin="10" RowDefinitions="Auto,Auto,Auto, *" ColumnDefinitions="*,*" RowSpacing="10" ColumnSpacing="10" >
+                    <controls:DashboardCardView Title="Hmotnost" Subtitle="{Binding WeightAnamnesis.IsPersonal_Date, Converter={StaticResource ElapsedDaysConverters}}" Unit="kg" Progress="" ValueColor="#28282B" Command="{Binding GotoPersonalAnamnesisCommand}" 
+                                                CommandParameter="{x:Static enum:AnamnesisType.Weight}" Grid.Row="0" Grid.Column="0" Value="{Binding WeightAnamnesis.IsPersonal_Value, Converter={StaticResource DecimalFormatConverter}, ConverterParameter='N1'}" />
+
+                    <controls:DashboardCardView Title="Tlak krve" Subtitle="{Binding BloodPressureAnamnesis.IsPersonal_Date, Converter={StaticResource ElapsedDaysConverters}}"  Command="{Binding GotoPersonalAnamnesisCommand}"
+                                                CommandParameter="{x:Static enum:AnamnesisType.BloodPressure}" Grid.Row="0" Grid.Column="1"
+                                                Value="{Binding BloodPressureAnamnesis.IsPersonal_Value}" ValueColor="{StaticResource MainColor}" Color="#FEFFFE"/>
+
+                    <controls:DashboardCardView Command="{Binding GotoPersonalAnamnesisCommand}" CommandParameter="{x:Static enum:AnamnesisType.HeartRate}" 
+                                                Subtitle="{Binding HeartRateAnamnesis.IsPersonal_Date, Converter={StaticResource ElapsedDaysConverters}}" Title="Tepová frekvence" Grid.Row="1" Grid.Column="0" 
+                                                Value="{Binding HeartRateAnamnesis.IsPersonal_Value}" ValueColor="#FFA131" Progress="" />
+
+                    <controls:DashboardCardView Command="{Binding GotoPersonalAnamnesisCommand}" CommandParameter="{x:Static enum:AnamnesisType.Cholesterol}" Subtitle="{Binding WeightAnamnesis.IsPersonal_Date, Converter={StaticResource ElapsedDaysConverters}}" Title="Hladina sérového&#x0a;LDL"  Grid.Row="1" Grid.Column="1" 
+                                                Value="{Binding CholesterolAnamnesis.IsPersonal_Value}" ValueColor="#2D2957" Unit="mmol/l"/>
+
+                    <controls:DashboardCardView Title="Fyzická aktivita" Command="{Binding GotoPhysicalActivityCommand}" HeightRequest="94"
+                                                Grid.Row="2" Grid.Column="0" Value="{Binding GeneralAnamnesis.IsGeneral_PhysicalActivityFrequencyType, Converter={StaticResource ActivityFrequencyTypeToTextConverter}}" IsBig="False"/>
+
+                    <controls:DashboardCardView Command="{Binding GotoIsSmokerDetailCommand}" IsBig="False" Title="Kouření" Grid.Row="2" Grid.Column="1" HeightRequest="94"
+                                                Value="{Binding AbususAnamnesis.IsAbusus_Smoker, Converter={d:StaticResource BoolToStringConverter}}" ValueColor="#2D2957"/>
+
+                    <StackLayout Grid.Row="3" VerticalOptions="EndAndExpand" Grid.ColumnSpan="2">
+                        <Button Command="{Binding GotoQuestionCreationCommand}" Style="{StaticResource NavigationButton}" BackgroundColor="#150666EB"  
+                                TextColor="{StaticResource SecondaryColor}"   Text="Zeptat se lékaře" />
+
+                        <Button Command="{Binding GotoQuestionaireCommand}" Style="{StaticResource NavigationButton}" Text="Mám obtíže" 
+                                BackgroundColor="#15EA4444" TextColor="{StaticResource MainColor}" />
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

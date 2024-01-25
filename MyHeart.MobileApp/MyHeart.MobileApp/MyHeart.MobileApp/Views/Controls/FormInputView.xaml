@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:effects="clr-namespace:MyHeart.MobileApp.Utils.Effects"
+             x:Class="MyHeart.MobileApp.Views.Controls.FormInputView">
+    <ContentView.Resources>
+        <Style TargetType="{x:Type Entry}" x:Key="FormInput">
+            <Setter Property="PlaceholderColor" Value="Gray"/>
+            <Setter Property="TextColor" Value="{StaticResource RegulatFontColor}"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+        </Style>
+
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout Spacing="2">
+            <Label x:Name="InputTitle" Style="{StaticResource InputTitle}"/>
+            <Frame x:Name="InputFrame" Style="{StaticResource InputFrame}">
+                <Entry Focused="FormInput_Focused" Unfocused="FormInput_Unfocused" Margin="5,0,0,0"  x:Name="FormInput" Style="{StaticResource FormInput}">
+                    <Entry.Effects>
+                        <effects:NoUnderlineEffect />
+                        <effects:NoDetaultBorderEffectiOS/>
+                    </Entry.Effects>
+                </Entry>
+            </Frame>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

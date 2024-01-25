@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net5</TargetFramework>
+		<AzureFunctionsVersion>v4</AzureFunctionsVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="myheart-firebase-keys.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="9.0.0" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="FirebaseAdmin" Version="2.3.0" />
+		<PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
+		<PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.13" />
+		<PackageReference Include="Microsoft.Azure.WebJobs.Extensions" Version="4.0.1" />
+		<PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Http" Version="3.0.2" />
+		<PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="4.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<Page Include="myheart-firebase-keys.json" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\MyHeart.Data\MyHeart.Data.csproj" />
+		<ProjectReference Include="..\MyHeart.Services\MyHeart.Services.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="host.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="local.settings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
+</Project>

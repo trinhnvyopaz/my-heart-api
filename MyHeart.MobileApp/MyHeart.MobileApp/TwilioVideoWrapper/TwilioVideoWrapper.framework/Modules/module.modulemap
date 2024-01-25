@@ -1,0 +1,11 @@
+framework module TwilioVideoWrapper {
+  umbrella header "TwilioVideoWrapper.h"
+
+  export *
+  module * { export * }
+}
+
+module TwilioVideoWrapper.Swift {
+  header "TwilioVideoWrapper-Swift.h"
+  requires objc
+}

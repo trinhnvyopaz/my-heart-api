@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./ClientApp",
+    "module": "esnext",
+    "target": "es5",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "skipDefaultLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    //"types": ["webpack-env"]
+    "lib": ["es2016", "dom"],
+    "paths": {
+      "@backend/*": ["./backend/*"],
+      "@components/*": ["./components/*"],
+      "@utils/*": ["./utils/*"],
+      "@helpers/*": ["./helpers/*"],
+      "@resources/*": ["./resources/*"],
+      "@models/*": ["./models/*"],
+    }
+  },
+  "files": ["./ClientApp/sfc.d.ts"],
+  "exclude": ["bin", "node_modules"]
+}

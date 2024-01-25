@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseQuestionaireStepView xmlns="http://xamarin.com/schemas/2014/forms" 
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:local="clr-namespace:MyHeart.MobileApp.Views.Questionnaire"
+                            x:Class="MyHeart.MobileApp.Views.Questionnaire.PickSymptomView"
+                            xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                            ios:Page.UseSafeArea="True"
+                            xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels.Questionnaire"
+                            xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers" xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+                            x:DataType="{x:Type vm:QuestionnairePageViewModel}"
+                            xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls">
+    <local:BaseQuestionaireStepView.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+    </local:BaseQuestionaireStepView.Resources>
+    <local:BaseQuestionaireStepView.Content>
+        <Grid Margin="8,0,8,8" ColumnDefinitions=".4*, .6*" RowDefinitions="Auto, *, Auto">
+            <StackLayout Grid.ColumnSpan="2">
+                <Label Margin="0,10,0,0" Grid.Row="0" Text="Vyberte ze seznamu Vaše hlavní&#10;potíže nebo vyhledejte níže." Style="{StaticResource QuestionaireTitleLabelStyle}"/>
+
+                <controls:SearchBarView Margin="0, 20" SearchQuery="{Binding SymptomQuery}" />
+            </StackLayout>
+
+            <ActivityIndicator Grid.ColumnSpan="2" Grid.Row="1" IsVisible="{Binding IsBusy}" IsRunning="True" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+
+            <CollectionView Grid.ColumnSpan="2" x:Name="SymptomList" ItemsSource="{Binding Symptoms}" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}" RemainingItemsThreshold="10"
+                                 IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" Grid.Row="1">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type vm:QuestionaireSymptomViewModel}">
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox Color="{StaticResource SecondaryColor}" HeightRequest="27" WidthRequest="27" IsChecked="{Binding IsChecked}" />
+                            <Label FontSize="18" FontFamily="{StaticResource NunitoBoldFont}" TextColor="#28282B" VerticalOptions="CenterAndExpand" Text="{Binding Symptom.Name}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <controls:QuestionaireNextButtonView Grid.Column="1" Grid.Row="2" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand" ActionCommand="{Binding GoNextCommand}" />
+        </Grid>
+    </local:BaseQuestionaireStepView.Content>
+</local:BaseQuestionaireStepView>

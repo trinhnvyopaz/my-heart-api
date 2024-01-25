@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage  xmlns:pages="http://rotorgames.com" 
+                  xmlns="http://xamarin.com/schemas/2014/forms" 
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  x:Class="MyHeart.MobileApp.Views.MyAnamnesis.MyAllergy.CreateAllergyPopUp"
+                  xmlns:viewmodels="clr-namespace:MyHeart.MobileApp.ViewModels.MyAnamnesis.MyAlergy" xmlns:effects="clr-namespace:MyHeart.MobileApp.Utils.Effects"
+                  x:DataType="{x:Type viewmodels:CreateAllergyPopUpViewModel}">
+    <!--<pages:PopupPage.BindingContext>
+        <viewmodels:CreateAllergyPopUpViewModel/>
+    </pages:PopupPage.BindingContext> >-->
+    <pages:PopupPage.Content>
+        <Frame HeightRequest="160" Margin="10" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label HorizontalOptions="StartAndExpand" Style="{StaticResource HeaderLabelStyle}" Text="Nová alergie"/>
+                    <Button HorizontalOptions="EndAndExpand" Style="{StaticResource CloseButton}" Command="{Binding GoBackCommand}" />
+                </StackLayout>
+                <Frame VerticalOptions="CenterAndExpand" Style="{StaticResource CardStyle}" Padding="0">
+                    <Grid ColumnDefinitions="*, auto">
+                        <Entry Margin="10,0,0,0" Grid.ColumnSpan="2" Placeholder="Zadejte alegii" Text="{Binding AllergyName}">
+                            <Entry.Effects>
+                                <effects:NoDetaultBorderEffectiOS/>
+                                <effects:NoUnderlineEffect />
+                            </Entry.Effects>
+                        </Entry>
+                        <Button Text="Přidat" Grid.Column="1" Margin="0,5,5,5" WidthRequest="72" CornerRadius="16" HeightRequest="30"
+                                Style="{StaticResource BaseButton}" BackgroundColor="{StaticResource SecondaryColor}" Padding="0" Command="{Binding SaveCommand}"/>
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </Frame>
+    </pages:PopupPage.Content>
+</pages:PopupPage>

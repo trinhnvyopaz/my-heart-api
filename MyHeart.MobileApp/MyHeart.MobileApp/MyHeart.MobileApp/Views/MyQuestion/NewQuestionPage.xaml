@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.NewQuestionPage"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             xmlns:effect="clr-namespace:MyHeart.MobileApp.Utils.Effects"
+             xmlns:viewmodels="clr-namespace:MyHeart.MobileApp.ViewModels.MyQuestion">
+    <ContentPage.BindingContext>
+        <viewmodels:NewQuestionPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="{x:Type Label}" x:Key="MessageLabel">
+            <Setter Property="TextColor" Value="{StaticResource DarkFontColor}" />
+        </Style>
+
+    </ContentPage.Resources>
+    <StackLayout Margin="10">
+        <controls:TitleHeader Title="Nový dotaz"  ActionCommand="{Binding GoBackCommand}" />
+        <Label Style="{StaticResource MessageLabel}" FontFamily="{StaticResource NunitoBoldFont}" FontSize="24" Text="Položte lékaři otázku" />
+        <Label Style="{StaticResource MessageLabel}" FontFamily="{StaticResource NunitoRegularFont}" FontSize="18"  Text="Ptejte se nejlepších lékařů a specialistů a získejte pomoc v souvislosti se svými obavami, týkající se problému se srdcem." />
+        <controls:FormInputView Text="{Binding Subject}" Title="Předmět" Placeholder="Čeho se Váš dotaz týká" />
+
+        <Label Text="Zpráva" Style="{StaticResource InputTitle}" />
+        <Frame Padding="5" CornerRadius="10" Style="{StaticResource CardStyle}" VerticalOptions="FillAndExpand">
+            <Editor Text="{Binding Message}" Placeholder="Vaše zpráva" BackgroundColor="White" VerticalOptions="FillAndExpand">
+                <Editor.Effects>
+                    <effect:NoDetaultBorderEffectiOS />
+                    <effect:NoUnderlineEffect />
+                </Editor.Effects>
+            </Editor>
+        </Frame>
+
+        <Button Margin="10" VerticalOptions="End" Text="Odeslat" Command="{Binding SendCommand}" HorizontalOptions="CenterAndExpand" Style="{StaticResource ActionButton}" />
+    </StackLayout>
+</ContentPage>

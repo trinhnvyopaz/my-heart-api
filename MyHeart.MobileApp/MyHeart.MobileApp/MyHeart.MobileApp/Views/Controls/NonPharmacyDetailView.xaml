@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.Controls.NonPharmacyDetailView"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls">
+  <ContentView.Content>
+      <StackLayout>
+            <Label TextColor="{StaticResource SecondaryColor}" Text="{Binding NonpharmaticTherapy.Name}" FontFamily="{StaticResource NunitoRegularFont}" FontSize="16" />
+            <controls:FormInputView EntryFocused="FormInputView_EntryFocused" InputColor="{StaticResource BackgroundColor}" Title="pracoviste" Text="{Binding FacilityName}"/>
+            <controls:FormInputView EntryFocused="FormInputView_EntryFocused" InputColor="{StaticResource BackgroundColor}" Title="Poznámka" Text="{Binding Note}"/>
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             Title="Dokumenty"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             xmlns:myreports="clr-namespace:MyHeart.MobileApp.ViewModels.MyReports" xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             ios:Page.UseSafeArea="True"
+             NavigationPage.HasNavigationBar="False"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             x:Class="MyHeart.MobileApp.Views.MyReportsPage">
+    <ContentPage.BindingContext>
+        <myreports:ReportPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding GoToProfilePageCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="{x:Static helpers:IconFont.Account}" FontFamily="MaterialIconFont" Color="{StaticResource LightFontColor}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto, *, Auto" VerticalOptions="FillAndExpand">
+            <controls:MainHeaderView Grid.Row="0" Title="Dokumenty" />
+            <ScrollView Grid.Row="1" Margin="8">
+                <StackLayout>
+                    <ActivityIndicator Grid.RowSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+                    <StackLayout Grid.Row="1" BindableLayout.ItemsSource="{Binding Reports}">
+                        <BindableLayout.EmptyView>
+                            <Image Source="illustrationdocuments.png" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                        </BindableLayout.EmptyView>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <controls:ReportCardView>
+                                    <controls:ReportCardView.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.GoToReportDetailCommand, Source={RelativeSource AncestorType={x:Type local:MyReportsPage}}}" 
+                                                          CommandParameter="{Binding Id}" />
+                                    </controls:ReportCardView.GestureRecognizers>
+                                </controls:ReportCardView>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <Button Margin="0,0,0,5" Grid.Row="2" Text="Přidat dokument" WidthRequest="345" VerticalOptions="EndAndExpand" Style="{StaticResource ActionButton}" Command="{Binding GoToAddFileCommand}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

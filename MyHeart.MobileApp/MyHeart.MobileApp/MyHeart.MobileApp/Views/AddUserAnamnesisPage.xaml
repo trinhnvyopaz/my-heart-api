@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             x:Class="MyHeart.MobileApp.Views.AddUserAnamnesisPage"
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             xmlns:view="clr-namespace:MyHeart.MobileApp.Views"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls">
+    <ContentPage.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Frame Margin="10">
+            <StackLayout>
+                <Label Text="Vyhledat" FontSize="Subtitle" TextColor="{StaticResource DarkFontColor}" FontAttributes="Bold"/>
+                <Entry Text="{Binding Query}" Placeholder="Vyhledat" />
+                <Button HorizontalOptions="CenterAndExpand" Text="Vyhledat" Command="{Binding SearchAnamnesisCommand}"
+                        IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" Style="{StaticResource MediumButton}"/>
+
+                <StackLayout HorizontalOptions="FillAndExpand">
+                    <ActivityIndicator Color="{StaticResource MainColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+                    <CollectionView IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" ItemsSource="{Binding UserAnamnesis}">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Frame Margin="5">
+                                        <Grid RowDefinitions="Auto, *">
+                                            <controls:MyTreatmentDetailView Grid.RowSpan="2" />
+                                            <ImageButton Command="{Binding BindingContext.AddItemCommand, Source={RelativeSource Mode=FindAncestor,AncestorType={x:Type view:AddUserAnamnesisPage}}}"
+                                                         CommandParameter="{Binding .}" HorizontalOptions="EndAndExpand" BackgroundColor="{StaticResource MainColor}">
+                                                <ImageButton.Source>
+                                                    <FontImageSource FontFamily="MaterialIconFont" Glyph="{x:Static helpers:IconFont.Plus}" Color="{StaticResource LightFontColor}" />
+                                                </ImageButton.Source>
+                                            </ImageButton>
+                                        </Grid>
+                                       
+                                    </Frame>
+                                </StackLayout>
+
+                            </DataTemplate>
+
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Button HorizontalOptions="CenterAndExpand" Text="Zpět" Command="{Binding GoBackCommand}" Style="{StaticResource MediumButton}" IsVisible="{Binding IsBusy, Converter={StaticResource NegateBoolConverter}}" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MyHeart.MobileApp.ViewModels"
+             Title="Detail dokumentu"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views"
+             x:Class="MyHeart.MobileApp.Views.ReportUpdatePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusy}"/>
+            <ScrollView>
+                <Frame Margin="10" HasShadow="True">
+                    <StackLayout>
+                        <StackLayout Spacing="10" Margin="10, 0">
+                            <Label Text="Nadpis" FontSize="Medium"/>
+                            <Entry x:Name="titleEntry" Text="{Binding Title}" Placeholder="Nadpis"
+                                   FontSize="Medium"/>
+                            <Label Text="Popis" FontSize="Medium"/>
+                            <Editor x:Name="descriptionEditor" Text="{Binding Description}"
+                                   FontSize="Medium" AutoSize="TextChanges"/>
+                                    <!--BackgroundColor="#F5F5F5"-->
+                            <!--last update layout-->
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Poslední úprava:" FontSize="Medium"
+                                       HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Label x:Name="lastUpdateLabel" Text="{Binding LastUpdate, StringFormat='{0:HH:mm dd MMMM yyyy}'}"
+                                       FontSize="Medium" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <!--date of the report-->
+                            <StackLayout Orientation="Horizontal">
+                                <Label  Text="Datum dokumentu:" FontSize="Medium"
+                                        HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <DatePicker Date="{Binding ReportDate}" HorizontalOptions="EndAndExpand"
+                                            WidthRequest="170"/>
+                                <!--<Label IsVisible="False" x:Name="reportDateLabel" Text="{Binding ReportDate, StringFormat='{0:dd MMMM yyyy}'}" FontSize="Medium"
+                                       HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>-->
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label  Text="Typ dokumentu:" FontSize="Medium"
+                                        HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Picker x:Name="typePicker" ItemsSource="{Binding TypeSource}"
+                                        SelectedItem="{Binding ReportType}"
+                                        HorizontalTextAlignment="Start"
+                                        HorizontalOptions="EndAndExpand"
+                                        WidthRequest="170"/>
+                                <!--<Label IsVisible="False" x:Name="typeLabel" Text="{Binding ReportType}" FontSize="Medium"
+                                       HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>-->
+                            </StackLayout>
+                            <Label Text="Soubory" FontSize="Medium"/>
+                            <StackLayout x:Name="filesLayout"
+                                         BindableLayout.ItemsSource="{Binding ReportFiles}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout>
+                                            <StackLayout Orientation="Horizontal" BackgroundColor="#E5E5E5">
+                                                <Label Text="{Binding Name}" Margin="10, 20">
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer CommandParameter="{Binding .}" Command="{Binding BindingContext.ShowFileCommand, Source={RelativeSource AncestorType={x:Type local:ReportUpdatePage}}}"/>
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+                                                <ImageButton Source="share_icon.png" Clicked="ShareFileButton_Clicked"
+                                                         Margin="10"
+                                                         HeightRequest="30" WidthRequest="30"
+                                                         HorizontalOptions="EndAndExpand"
+                                                         VerticalOptions="CenterAndExpand"/>
+                                            </StackLayout>
+                                            <Image Source="{Binding ImgSource}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="CenterAndExpand">
+                            <Button Text="Uložit změny" Clicked="UpdateButton_Clicked"
+                                    BackgroundColor="{StaticResource MainColor}"
+                                    TextColor="{StaticResource LightFontColor}"
+                                    Margin="10, 10, 10, 0"
+                                    Padding="10"/>
+
+                            <Button Text="Vymazat" Clicked="DeleteButton_Clicked"
+                                    BackgroundColor="{StaticResource MainColor}"
+                                    TextColor="{StaticResource LightFontColor}"
+                                    Margin="10, 10, 10, 0"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

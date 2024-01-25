@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             x:Class="MyHeart.MobileApp.Views.MyAnamnesis.MyTreatmentListPage" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers" xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             ios:Page.UseSafeArea="True" BackgroundColor="{StaticResource BackgroundColor}"
+             xmlns:viewmodel="clr-namespace:MyHeart.MobileApp.ViewModels"
+             x:DataType="{x:Type viewmodel:MyTreatmentListViewModel}"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views.MyAnamnesis">
+    <ContentPage.Resources>
+        <Style TargetType="{x:Type Label}" x:Key="TitleStyle">
+            <Setter Property="TextColor" Value="#0666EB" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontFamily" Value="{StaticResource NunitoBoldFont}"/>
+        </Style>
+
+        <Style TargetType="{x:Type Label}" x:Key="TitleValueStyle" BasedOn="{StaticResource TitleStyle}">
+            <Setter Property="FontFamily" Value="{StaticResource NunitoRegularFont}"/>
+        </Style>
+        <converters:JoinMultiConverter x:Key="JoinMultiConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto, .9*, Auto">
+            <Grid ColumnDefinitions="Auto, *" Margin="8,0">
+                <ImageButton Command="{Binding GoBackCommand}" >
+                    <ImageButton.Source>
+                        <FontImageSource FontFamily="MaterialIconFont" Glyph="{Static helpers:IconFont.ArrowLeftTop}" Color="{StaticResource SecondaryColor}" />
+                    </ImageButton.Source>
+                </ImageButton>
+                <Label Grid.ColumnSpan="2" FontFamily="{StaticResource NunitoBoldFont}" FontSize="17" TextColor="{StaticResource DarkFontColor}" Text="Moje léčby" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+            </Grid>
+            <CollectionView Grid.Row="1" Grid.RowSpan="2" Margin="8" ItemsSource="{Binding Items}" Scrolled="CollectionView_Scrolled">
+                <CollectionView.ItemsLayout >
+                    <LinearItemsLayout ItemSpacing="8" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type viewmodel:UserAnamnesisViewModel}">
+                        <Frame  Style="{StaticResource CardStyle}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type local:MyTreatmentListPage}}}" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                            <StackLayout>
+                                <controls:CardViewHeader InputTransparent="True" Title="{Binding IsPharmacy_Name}">
+                                    <controls:CardViewHeader.Value>
+                                        <MultiBinding Converter="{StaticResource JoinMultiConverter}">
+                                            <Binding Path="IsPharmacy_MorningDose" />
+                                            <Binding Path="IsPharmacy_AfternoonDose" StringFormat="-{0}" />
+                                            <Binding Path="IsPharmacy_EveningDose" StringFormat="-{0}"/>
+                                        </MultiBinding>
+                                    </controls:CardViewHeader.Value>
+                                </controls:CardViewHeader>
+                                
+                                <!--<StackLayout Orientation="Horizontal" Spacing="0">
+                                    <Label Text="{Binding IsPharmacy_Name}" Style="{StaticResource TitleStyle}" />
+                                    <Label Text="{Binding IsPharmacy_MorningDose}" Style="{StaticResource TitleValueStyle}" HorizontalOptions="EndAndExpand" />
+                                    <Label Text="{Binding IsPharmacy_AfternoonDose, StringFormat='-{0}'}" Style="{StaticResource TitleValueStyle}" />
+                                    <Label Text="{Binding IsPharmacy_EveningDose, StringFormat='-{0}'}" Style="{StaticResource TitleValueStyle}" />
+                                </StackLayout>-->
+
+                                <BoxView Margin="-20,0" Style="{StaticResource Separator}"/>
+
+                                <controls:CardViewItem Title="Datum vzniku" Value="{Binding CreatedAt, StringFormat='{0:dd.MM.yy}'}" />
+                                <BoxView Style="{StaticResource Separator}"/>
+                                <controls:CardViewItem Title="Poznámka" Value="{Binding IsPharmacy_Note}" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <ImageButton x:Name="AddItemButton" Style="{StaticResource AddCircleButton}" Command="{Binding AddItemCommand}" Grid.Row="2" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

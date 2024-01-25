@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.RegistrationPage"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" BackgroundColor="{StaticResource BackgroundColor}"
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels" xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters" xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls">
+    <ContentPage.BindingContext>
+        <vm:RegistrationPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <converters:StringToBoolConverter x:Key="StringToBoolConverter" />
+        <Thickness x:Key="ValidationLabelMargin">5,0,0,0</Thickness>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid Padding="16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="8*" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="1" Style="{StaticResource MainTitle}" HorizontalOptions="CenterAndExpand" Text="My HEART"  />
+                <StackLayout Grid.Row="2" Spacing="1">
+                    <controls:FormInputView Title="Email" Text="{Binding Register.Email}" Keyboard="Email"/>
+                    <Label Style="{StaticResource ValidationLabelStyle}" Text="{Binding Register.EmailValidationMessage}"/>
+
+                    <controls:FormInputView Title="Jméno" Text="{Binding Register.FirstName}"/>
+                    <Label Style="{StaticResource ValidationLabelStyle}" Text="{Binding Register.FirstNameValidationMessage}" />
+
+                    <controls:FormInputView Title="Přijmení" Text="{Binding Register.LastName}" />
+                    <Label Style="{StaticResource ValidationLabelStyle}" Text="{Binding Register.LastNameValidationMessage}" />
+
+                    <controls:FormInputView IsPassword="True" Title="Heslo" Text="{Binding Register.Password}"/>
+                    <Label Style="{StaticResource ValidationLabelStyle}" Text="{Binding Register.PasswordValidationMessage}" />
+
+                    <controls:FormInputView IsPassword="True" Title="Znovu heslo" Text="{Binding Register.PasswordAgain}"/>
+                    <Label Style="{StaticResource ValidationLabelStyle}" Text="{Binding Register.PasswordAgainValidationMessage}" />
+
+                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                        <Button Command="{Binding GoBackCommand}" Style="{StaticResource InverseActionButton}" WidthRequest="124" Text="Zpět" HorizontalOptions="FillAndExpand" />
+                        <Button Command="{Binding RegisterCommand}" Style="{StaticResource ActionButton}" Text="Registrovat" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

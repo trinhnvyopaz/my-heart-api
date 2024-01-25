@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             x:Class="MyHeart.MobileApp.Views.Controls.QuestionCardView"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             xmlns:question="clr-namespace:MyHeart.DTO.Questions;assembly=MyHeart.DTO">
+    <ContentView.Resources>
+        <converters:QuestionStatusToColorConverter x:Key="QuestionStatusToColorConverter"/>
+        <converters:QuestionStatusToIconConverter x:Key="QuestionStatusToIconConverter"/>
+        <converters:QuestionStatusToTextConverter x:Key="QuestionStatusToTextConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Frame Margin="10, 2.5" Style="{StaticResource CardStyle}">
+            <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
+                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Subject}" Style="{StaticResource HeaderLabelStyle}"/>
+                <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" >
+                    <Label TextColor="{StaticResource LightGreyFontColor}" FontFamily="{StaticResource NunitoSemiBoldFont}"  HorizontalTextAlignment="End" 
+                       Text="{Binding CreationDate, StringFormat='{0:MM.dd.YYYY}'}" FontSize="18"/>
+                    <Image Source="rightarrow.png" HeightRequest="18" WidthRequest="10" Margin="4,0,0,0" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+                    <Image WidthRequest="24" HeightRequest="24">
+                        <Image.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="{x:Static question:QuestionStatus.AwaitingDoctorResponse}" TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="hourglass.png"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="{x:Static question:QuestionStatus.AwaitingPatientResponse}" TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="hourglass.png"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="{x:Static question:QuestionStatus.Open}" TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="done.png"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                    <Label TextColor="{Binding Status, Converter={StaticResource QuestionStatusToColorConverter}}" FontSize="18" 
+                           Text="{Binding Status, Converter={StaticResource QuestionStatusToTextConverter}}" FontFamily="{StaticResource NunitoSemiBoldFont}"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

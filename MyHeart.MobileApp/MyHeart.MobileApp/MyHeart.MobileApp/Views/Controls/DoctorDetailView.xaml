@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.Controls.DoctorDetailView"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls" 
+             xmlns:effects="clr-namespace:MyHeart.MobileApp.Utils.Effects">
+    <ContentView.Content>
+        <StackLayout>
+            <controls:FormInputView Title="Jméno" Placeholder="Jméno" Text="{Binding Doctor.Firstname}"/>
+            <controls:FormInputView Title="Přijmení" Placeholder="Přijmení" Text="{Binding Doctor.Lastname}"/>
+            <controls:FormInputView Title="Email" IsEnabled="False" Placeholder="Email" Text="{Binding Doctor.Email}"/>
+            <controls:FormInputView Title="Phone" Placeholder="Phone" Text="{Binding Doctor.Phone}"/>
+            <controls:FormEditorInputView Title="Popis" Placeholder="Popis" Text="{Binding Doctor.Description}"/>
+            <controls:FormEditorInputView Title="Pracoviště" Placeholder="Pracoviště" Text="{Binding Doctor.Workplace}"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

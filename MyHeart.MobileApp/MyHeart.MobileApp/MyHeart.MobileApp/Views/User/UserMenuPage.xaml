@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.User.UserMenuPage"
+             NavigationPage.HasNavigationBar="False" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels.User" 
+             xmlns:user="clr-namespace:MyHeart.MobileApp.Views.User" xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             x:DataType="{x:Type vm:UserMenuViewModel}">
+    <ContentPage.BindingContext>
+        <vm:UserMenuViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="{x:Type Label}" x:Key="TitleLabel">
+            <Setter Property="FontFamily" Value="{StaticResource NunitoExtraBoldFont}"/>
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="TextColor" Value="#47474A"/>
+        </Style>
+
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <controls:TitleHeader ActionCommand="{Binding GoBackCommand}" Margin="0,5,0,0"/>
+            <StackLayout Margin="8,0,8,0" Spacing="5">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding User.FirstName}" Style="{StaticResource TitleLabel}" />
+                    <Label Text="{Binding User.LastName}" Style="{StaticResource TitleLabel}"/>
+                </StackLayout>
+
+                <user:UserMenuItemView Title="Profil" Icon="coloruser.png" Command="{Binding GotoUserPageCommand}"/>
+                <user:UserMenuItemView Title="Novinky" Icon="news.png" Command="{Binding GoToNotificationsCommand}"/>
+                <!--<user:UserMenuItemView Title="Notification" Icon="notification.png" />-->
+             
+            </StackLayout>
+            <Label TextDecorations="Underline" Text="Odhlásit se" 
+                   FontFamily="{StaticResource NunitoBoldFont}" FontSize="17" TextColor="{StaticResource DarkFontColor}"
+                   VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LogoutCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+		<integer>2</integer>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Aplikace potřebuje přístup ke kalendáři</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Aplikace potřebuje přístup k fotkám</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Aplikace potřebuje přístup k foto galerii</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Aplikace potřebuje přístup k HealthKitu pro pročtení tepové frekvence</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Aplikace potřebuje přístup ke zdravotním datům pro trackování a zobrazovaní Vašeho srdečního tepu.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Aplikace potřebuje přístup ke kameře</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Aplikace potřebuje přístup k mikrofonu</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>healthkit</string>
+	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	<key>MinimumOSVersion</key>
+	<string>10.0</string>
+	<key>CFBundleDisplayName</key>
+	<string>MojeSrdce</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.durdil.myheart</string>
+	<key>CFBundleVersion</key>
+	<string>3.0</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>CFBundleName</key>
+	<string>MyHeart.MobileApp</string>
+	<key>XSAppIconAssets</key>
+	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Need your scan face to login into application</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+		<string>remote-notification</string>
+	</array>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<string>No</string>
+</dict>
+</plist>

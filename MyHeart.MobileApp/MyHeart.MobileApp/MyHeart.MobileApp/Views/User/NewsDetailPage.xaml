@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             x:Class="MyHeart.MobileApp.Views.User.NewsDetailPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Content>
+        <Grid RowSpacing="0" RowDefinitions="Auto, Auto, *">
+            <controls:TitleHeader BackgroundColor="{StaticResource BackgroundColor}" Title="{Binding TherapyNews.Text}" ActionCommand="{Binding GoBackCommand}"/>
+            <StackLayout Padding="9, 18,9,0"  Grid.Row="1" BackgroundColor="White" Orientation="Horizontal">
+                <Label Style="{StaticResource HeaderLabelStyle}" Text="{Binding TherapyNews.Text}"/>
+                <Label TextColor="{StaticResource LightGreyFontColor}" FontFamily="{StaticResource NunitoBoldFont}" FontSize="18"
+                       Text="{Binding TherapyNews.CreateDate, StringFormat='{0:dd.MM.yyyy}'}" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <Frame HasShadow="False" Padding="9,0" Grid.Row="2">
+                <controls:AutoHeigthWebView >
+                    <controls:AutoHeigthWebView.Source>
+                        <HtmlWebViewSource Html="{Binding TherapyNews.Description}" />
+                    </controls:AutoHeigthWebView.Source>
+                </controls:AutoHeigthWebView>
+            </Frame>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

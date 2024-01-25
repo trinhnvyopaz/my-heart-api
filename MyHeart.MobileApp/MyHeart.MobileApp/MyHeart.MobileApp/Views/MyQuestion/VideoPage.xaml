@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.VideoPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+             xmlns:vm="clr-namespace:MyHeart.MobileApp.ViewModels"
+             BackgroundColor="#1e1e1e"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             x:DataType="{x:Type vm:VideoPageViewModel}">
+    <ContentPage.Behaviors>
+
+    </ContentPage.Behaviors>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:NegateBoolConverter x:Key="NegateBoolConverter"/>
+            <Style TargetType="{x:Type ImageButton}">
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="WidthRequest" Value="60"/>
+                <Setter Property="CornerRadius" Value="30"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource SecondaryColor}"/>
+                <Setter Property="Padding" Value="10"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid RowDefinitions="*, Auto" >
+            <controls:TwilioVideoView RoomDisconnectedCommand="{Binding EndCallCommand}" x:Name="TwilioVideo" IsCameraOn="{Binding IsCameraOn}" IsMuted="{Binding IsMuted}"
+                                      Token="{Binding Token}" RoomName="{Binding RoomName}" ShouldEndCall="{Binding ShouldEndVideo}"
+                                      IsJoiningRoom="{Binding IsJoiningRoom}" IsWaitingForParticipants="{Binding IsWaitingForParticipants}" BackgroundColor="#1e1e1e"
+                                      TrackSubscribedCommand="{Binding TrackSubscribedCommand}" TrackUnsubscribedCommand="{Binding TrackUnsubscribedCommand}"/>
+
+            <Image  IsVisible="{Binding ShowPlaceholderImage}" WidthRequest="60" HeightRequest="60" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Image.Source>
+                    <FontImageSource Glyph="{x:Static helpers:IconFont.VideoOff}" Color="White" FontFamily="{StaticResource MaterialIconFont}" />
+                </Image.Source>
+            </Image>
+
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"  IsVisible="{Binding ShowVideo, Converter={StaticResource NegateBoolConverter}}">
+                <ActivityIndicator Color="{StaticResource SecondaryColor}" IsRunning="{Binding ShowVideo, Converter={StaticResource NegateBoolConverter}}"/>
+                <Label IsVisible="{Binding IsInPictureInPictureMode, Converter={StaticResource NegateBoolConverter}}" TextColor="{StaticResource SecondaryColor}" Text="Připojování do hovoru" Style="{StaticResource RegularLabelStyle}">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="{x:Type Label}" Binding="{Binding IsWaitingForParticipants}" Value="True">
+                            <Setter Property="Text" Value="Čekání na dalšího účastníka"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </StackLayout>
+
+            <StackLayout Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" Grid.Row="1" Orientation="Horizontal" IsVisible="{Binding ShowVideoControls}">
+                <ImageButton Command="{Binding ToggleCameraCommand}">
+                    <ImageButton.Source>
+                        <FontImageSource Glyph="{x:Static helpers:IconFont.Video}" Size="30" Color="White" FontFamily="{StaticResource MaterialIconFont}" />
+                    </ImageButton.Source>
+                    <ImageButton.Triggers>
+                        <DataTrigger TargetType="{x:Type ImageButton}" Binding="{Binding IsCameraOn}" Value="False">
+                            <Setter Property="Source">
+                                <Setter.Value>
+                                    <FontImageSource Glyph="{x:Static helpers:IconFont.VideoOff}" Size="30" Color="White" FontFamily="{StaticResource MaterialIconFont}" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </ImageButton.Triggers>
+                </ImageButton>
+                <ImageButton Command="{Binding ToggleMicrophoneCommand}">
+                    <ImageButton.Source>
+                        <FontImageSource Glyph="{x:Static helpers:IconFont.Microphone}" Size="30" Color="White" FontFamily="{StaticResource MaterialIconFont}" />
+                    </ImageButton.Source>
+                    <ImageButton.Triggers>
+                        <DataTrigger TargetType="{x:Type ImageButton}" Binding="{Binding IsMuted}" Value="True">
+                            <Setter Property="Source">
+                                <Setter.Value>
+                                    <FontImageSource Glyph="{x:Static helpers:IconFont.MicrophoneOff}" Size="30" Color="White" FontFamily="{StaticResource MaterialIconFont}" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </ImageButton.Triggers>
+                </ImageButton>
+                <ImageButton Command="{Binding EndCallCommand}" BackgroundColor="{StaticResource MainColor}">
+                    <ImageButton.Source>
+                        <FontImageSource Glyph="{x:Static helpers:IconFont.PhoneHangup}" Size="30" Color="White" FontFamily="{StaticResource MaterialIconFont}" />
+                    </ImageButton.Source>
+                </ImageButton>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

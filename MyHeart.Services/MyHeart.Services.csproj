@@ -1,7 +1,39 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>MyHeart.Services</AssemblyName>
+    <RootNamespace>MyHeart.Services</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.8.0" />
+    <PackageReference Include="CsvHelper" Version="19.0.0" />
+    <PackageReference Include="DinkToPdf" Version="1.0.8" />
+    <PackageReference Include="EFCore.BulkExtensions" Version="3.6.1" />
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
+    <PackageReference Include="FirebaseAdmin" Version="2.4.0" />
+    <PackageReference Include="Handlebars.Net" Version="2.1.2" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.28" />
+    <PackageReference Include="HtmlSanitizer" Version="5.0.376" />
+    <PackageReference Include="Isopoh.Cryptography.Argon2" Version="1.1.10" />
+    <PackageReference Include="MailKit" Version="2.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
+    <PackageReference Include="morelinq" Version="3.3.2" />
+    <PackageReference Include="QRCoder" Version="1.4.1" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+    <PackageReference Include="Stripe.net" Version="41.11.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.19.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
+    <PackageReference Include="TwoFactorAuth.Net" Version="1.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyHeart.Core\MyHeart.Core.csproj" />
+    <ProjectReference Include="..\MyHeart.Data\MyHeart.Data.csproj" />
+    <ProjectReference Include="..\MyHeart.DTO\MyHeart.DTO.csproj" />
+  </ItemGroup>
 
 </Project>

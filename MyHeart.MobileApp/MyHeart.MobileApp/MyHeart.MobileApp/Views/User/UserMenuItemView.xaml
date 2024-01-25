@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.User.UserMenuItemView">
+  <ContentView.Content>
+        <Frame Style="{StaticResource CardStyle}" Padding="10">
+            <StackLayout Orientation="Horizontal" Spacing="15" >
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="TapRecognizer" />
+                </StackLayout.GestureRecognizers>
+
+                <Image  WidthRequest="32" HeightRequest="32" HorizontalOptions="Start" x:Name="IconImage"/>
+                <Label Text="Profil" FontFamily="{StaticResource NunitoBoldFont}" HorizontalOptions="StartAndExpand" VerticalTextAlignment="Center" FontSize="18" TextColor="#47474A" x:Name="TitleLabel" />
+                <Image Source="rightarrow.png" HorizontalOptions="EndAndExpand" WidthRequest="11" Margin="0,0,8,0" HeightRequest="11" />
+
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:effects="clr-namespace:MyHeart.MobileApp.Utils.Effects"
+             x:Class="MyHeart.MobileApp.Views.Controls.FormTimeInputView"
+             xmlns:editors="http://schemas.devexpress.com/xamarin/2014/forms/editors"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers">
+    <ContentView.Resources>
+        <Style TargetType="{x:Type Entry}" x:Key="FormInput">
+            <Setter Property="PlaceholderColor" Value="Gray"/>
+            <Setter Property="TextColor" Value="{StaticResource RegulatFontColor}"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+        </Style>
+
+        <Style TargetType="{x:Type Frame}" x:Key="InputFrame">
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HeightRequest" Value="40" />
+        </Style>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout Spacing="2">
+            <Label x:Name="InputTitle" Style="{StaticResource InputTitle}"/>
+            <Frame x:Name="InputFrame" Style="{StaticResource InputFrame}">
+                <StackLayout>
+                    <editors:TimeEdit IsTimeIconVisible="False" BorderThickness="0" FocusedBorderThickness="0" HeightRequest="40" x:Name="TimePicker"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

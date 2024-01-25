@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             x:Class="MyHeart.MobileApp.Views.Controls.MyTreatmentDetailView"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+             xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters">
+    <ContentView.Resources>
+        <Style TargetType="{x:Type Label}" x:Key="InputHeader">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="{StaticResource NunitoRegularFont}"/>
+            <Setter Property="TextColor" Value="{StaticResource RegulatFontColor}"/>
+        </Style>
+        <converters:NullToCurrentDateTimeConverter x:Key="NullToCurrentDateTimeConverter" />
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout Spacing="0" x:Name="MainContainer">
+            <Label Style="{StaticResource SubtitleLabelStyle}" Text="{Binding IsPharmacy_Name}"/>
+
+            <Label x:Name="DosageTitleLabel" Text="Dávkování" Style="{StaticResource InputHeader}" Margin="0,10,0,0"/>
+            <Label x:Name="DosageValueLabel" FontSize="18" TextColor="#28282B" Margin="0,0,0,5" FontFamily="{StaticResource WorkSansMediumFont}" Text="{Binding IsPharmacy_Dose}"/>
+
+            <controls:FormDateInputView ShowIcon="False" InputColor="{StaticResource BackgroundColor}" Title="Datum vzniku" Date="{Binding CreatedAt}"/>
+            <controls:FormInputView EntryFocused="FormInputView_FocusedChanged" EntryUnfocused="FormInputView_FocusedChanged" InputColor="{StaticResource BackgroundColor}" Title="Ráno" Text="{Binding IsPharmacy_MorningDose}"/>
+            <controls:FormInputView EntryFocused="FormInputView_FocusedChanged" EntryUnfocused="FormInputView_FocusedChanged" Margin="0,5,0,0" InputColor="{StaticResource BackgroundColor}" Title="Odpoledne" Text="{Binding IsPharmacy_AfternoonDose}"/>
+            <controls:FormInputView EntryFocused="FormInputView_FocusedChanged" EntryUnfocused="FormInputView_FocusedChanged" Margin="0,5,0,0" InputColor="{StaticResource BackgroundColor}" Title="Večer" Text="{Binding IsPharmacy_EveningDose}"/>
+            <controls:FormInputView x:Name="EntryInputView" EntryFocused="FormInputView_FocusedChanged" EntryUnfocused="FormInputView_FocusedChanged" Margin="0,5,0,0" InputColor="{StaticResource BackgroundColor}" Title="Poznámka" Text="{Binding IsPharmacy_Note}"/>
+
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

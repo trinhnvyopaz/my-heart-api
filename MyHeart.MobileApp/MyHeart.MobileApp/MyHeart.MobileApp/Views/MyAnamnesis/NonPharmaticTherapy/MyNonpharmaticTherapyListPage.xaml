@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.MyAnamnesis.NonPharmaticTherapy.MyNonpharmaticTherapyListPage"
+             xmlns:local="clr-namespace:MyHeart.MobileApp.Views.MyAnamnesis.NonPharmaticTherapy"
+             xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             xmlns:viewmodels="clr-namespace:MyHeart.MobileApp.ViewModels"
+             x:DataType="{x:Type viewmodels:MyNonpharmaticTherapyListViewModel}">
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto, *,Auto">
+            <Grid Margin="8,0,0,0" Grid.Row="0" ColumnDefinitions="Auto, *">
+                <Label Style="{StaticResource HeaderLabelStyle}" Text="Provedené výkony" Grid.ColumnSpan="2" HorizontalTextAlignment="Center"/>
+                <ImageButton Command="{Binding GoBackCommand}" >
+                    <ImageButton.Source>
+                        <FontImageSource FontFamily="MaterialIconFont" Glyph="{Static helpers:IconFont.ArrowLeftTop}" Color="{StaticResource SecondaryColor}" />
+                    </ImageButton.Source>
+                </ImageButton>
+            </Grid>
+            <CollectionView Grid.Row="1" Margin="8,0" ItemsSource="{Binding Items}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type viewmodels:UserNonpharmacyViewModel}">
+                        <Frame CornerRadius="10" Style="{StaticResource CardStyle}" Padding="0">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type local:MyNonpharmaticTherapyListPage}}}" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                            <Grid RowDefinitions="*,Auto,*">
+                                <StackLayout Margin="20,20,20,10" Orientation="Horizontal">
+                                    <Label Style="{StaticResource SubtitleLabelStyle}" Text="{Binding NonpharmaticTherapy.Name}" />
+                                    <ImageButton Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type local:MyNonpharmaticTherapyListPage}}}" CommandParameter="{Binding .}" Style="{StaticResource RightArrowButtonStyle}" HorizontalOptions="EndAndExpand" />
+                                </StackLayout>
+                                <BoxView Style="{StaticResource Separator}" Grid.Row="1"/>
+                                <StackLayout Margin="20,10,20,20" Orientation="Horizontal" Grid.Row="2">
+                                    <Label Text="Pracoviště" TextColor="{StaticResource RegulatFontColor}" HorizontalOptions="StartAndExpand" />
+                                    <Label Text="{Binding FacilityName}" HorizontalOptions="EndAndExpand" />
+                                </StackLayout>
+                                
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <ImageButton Style="{StaticResource AddCircleButton}" Grid.Row="2"  Command="{Binding AddItemCommand}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

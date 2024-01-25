@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.Controls.ReportCardView"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             >
+    <ContentView.Resources>
+        <Style TargetType="{x:Type Label}" x:Key="ReportCardSubtitle">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextColor" Value="{StaticResource GreyFontColor}"/>
+            <Setter Property="FontFamily" Value="{StaticResource NunitoRegularFont}"/>
+        </Style>
+        <xct:TextCaseConverter x:Key="TextCaseConverter" Type="Upper" />
+    </ContentView.Resources>
+  <ContentView.Content>
+        <Frame x:Name="MainFrame" Padding="16,5,16,0" HeightRequest="80" Style="{StaticResource CardStyle}">
+            <Grid RowDefinitions="*, *" RowSpacing="0" ColumnSpacing="15" ColumnDefinitions="Auto,*,Auto">
+                <Image HeightRequest="42" WidthRequest="42" Source="icondocument.png" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" />
+                <Label Grid.Column="1" Grid.Row="0" Text="{Binding Title}" Style="{StaticResource SubtitleLabelStyle}" FontAttributes="Bold"/>
+                <StackLayout VerticalOptions="StartAndExpand" Spacing="15" Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                    <!--<Label Style="{StaticResource ReportCardSubtitle}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text=""/>
+                                <Span Text=""/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>-->
+                    <Label Style="{StaticResource ReportCardSubtitle}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Formát: "/>
+                                <Span Text="{Binding Files[0].Extension, Converter={StaticResource TextCaseConverter}}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+                <Image HeightRequest="10" WidthRequest="10" Source="rightarrow.png" Grid.Column="2" Grid.Row="0"/>
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

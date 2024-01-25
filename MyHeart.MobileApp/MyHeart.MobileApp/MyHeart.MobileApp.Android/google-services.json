@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "991221169920",
+    "project_id": "myheart-ac82d",
+    "storage_bucket": "myheart-ac82d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991221169920:android:ca48a2e58e5d7e5fa67de5",
+        "android_client_info": {
+          "package_name": "com.vdurdil.myheart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991221169920-l8rk1m599inaohp4s1lcbpfq7h56kfhv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vdurdil.myheart",
+            "certificate_hash": "85d1725090e6829be483ae3a1c12807836995d50"
+          }
+        },
+        {
+          "client_id": "991221169920-qethab47tqt95cto3iq0heh6vn531oib.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG_If4fauevOGp1DHTqXnKiGknMZnhqYs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991221169920-ke6doqtg145q48n15ij810hcqqp09nfs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "991221169920-ia3p0k48f9nogi7i2i5ar8qdn4ja76q2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.durdil.myheart"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

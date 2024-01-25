@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                x:Class="MyHeart.MobileApp.Views.MyAnamnesis.AnamnesisAddPage"
+                xmlns:helpers="clr-namespace:MyHeart.MobileApp.Utils.Helpers"
+                xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls"
+                xmlns:converters="clr-namespace:MyHeart.MobileApp.Utils.Converters"
+                xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                ios:Page.UseSafeArea="True" BackgroundColor="#66403E5A"
+                HasKeyboardOffset="False"
+                xmlns:view="clr-namespace:MyHeart.MobileApp.Views.MyAnamnesis" xmlns:effects="clr-namespace:MyHeart.MobileApp.Utils.Effects">
+
+    <pages:PopupPage.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter"/>
+    </pages:PopupPage.Resources>
+    <pages:PopupPage.Content>
+        <Frame ClassId="mainLayout" x:Name="MainContainer" HasShadow="False" Margin="10" BackgroundColor="{StaticResource BackgroundColor}">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label x:Name="SubtitleLabel" VerticalTextAlignment="Center" FontSize="24" TextColor="{StaticResource DarkFontColor}" 
+                           FontFamily="{StaticResource NunitoExtraBoldFont}" HorizontalOptions="StartAndExpand"/>
+                    <Button Command="{Binding GoBackCommand}" Style="{StaticResource CloseButton}" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+
+                <controls:SearchBarView SearchQuery="{Binding SearchQuery, Mode=TwoWay}" />
+
+                <StackLayout HorizontalOptions="FillAndExpand">
+                    <ActivityIndicator Color="{StaticResource MainColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+
+                    <ContentView Content="{Binding ItemsView, Source={RelativeSource Mode=FindAncestor,AncestorType={x:Type view:AnamnesisAddPage}}}" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </pages:PopupPage.Content>
+</pages:PopupPage>

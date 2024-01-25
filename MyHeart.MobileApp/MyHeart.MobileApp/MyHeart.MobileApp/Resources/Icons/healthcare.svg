@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="Icon_lecba" data-name="Icon lecba" transform="translate(-12.003 -11.538)">
+    <g id="icon_upravit" transform="translate(-1183 -178.489)">
+      <g id="Group_11145" data-name="Group 11145" transform="translate(1.88 6.002)">
+        <g id="Group_11143" data-name="Group 11143" transform="translate(1209 193.809) rotate(45)" opacity="0.8">
+          <g id="Rectangle_2928" data-name="Rectangle 2928" transform="translate(0 0)" fill="none" stroke="#0666eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6">
+            <rect width="8.842" height="19.453" rx="4.421" stroke="none"/>
+            <rect x="0.8" y="0.8" width="7.242" height="17.853" rx="3.621" fill="none"/>
+          </g>
+          <path id="Path_10101" data-name="Path 10101" d="M0,0H1.39" transform="translate(0.854 9.726)" fill="none" stroke="#0666eb" stroke-linecap="round" stroke-width="1.6"/>
+          <path id="Path_10102" data-name="Path 10102" d="M0,0H3.657" transform="translate(4.243 9.726)" fill="none" stroke="#0666eb" stroke-linecap="round" stroke-width="1.6"/>
+        </g>
+        <g id="Group_11144" data-name="Group 11144" transform="translate(1202.958 192.518) rotate(-45)" opacity="0.8">
+          <path id="Path_10103" data-name="Path 10103" d="M.037,15.095A4.363,4.363,0,0,0,4.4,19.458h.115A4.363,4.363,0,0,0,8.88,15.095V4.369A4.363,4.363,0,0,0,4.516.005H4.4A4.053,4.053,0,0,0,0,4.406" transform="translate(0 0)" fill="none" stroke="#0666eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/>
+          <path id="Path_10104" data-name="Path 10104" d="M8.886,9.555H4.948" fill="none" stroke="#0666eb" stroke-linecap="round" stroke-width="1.6"/>
+        </g>
+      </g>
+    </g>
+    <rect id="Rectangle_2991" data-name="Rectangle 2991" width="32" height="32" transform="translate(12.003 11.538)" fill="none"/>
+  </g>
+</svg>

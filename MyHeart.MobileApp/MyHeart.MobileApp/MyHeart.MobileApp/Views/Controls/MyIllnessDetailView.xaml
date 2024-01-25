@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHeart.MobileApp.Views.Controls.MyIllnessDetailView"
+             xmlns:controls="clr-namespace:MyHeart.MobileApp.Views.Controls">
+    <ContentView.Content>
+        <StackLayout>
+            <Label Style="{StaticResource SubtitleLabelStyle}" Text="{Binding Disease.Name}" />
+            <controls:FormDateInputView ShowIcon="False" Title="Datum vzniku" InputColor="{StaticResource BackgroundColor}" Date="{Binding StartDate}"/>
+            <controls:FormInputView EntryFocused="FormInputView_FocusChanged" Title="Poznámka" InputColor="{StaticResource BackgroundColor}" Text="{Binding Note}"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

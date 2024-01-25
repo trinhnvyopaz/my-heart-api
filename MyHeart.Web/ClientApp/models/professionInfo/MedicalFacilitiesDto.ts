@@ -1,0 +1,36 @@
+import MedicalFacilitiesNonpharmaticTherapyDto from "./bonds/MedicalFacilitiesNonpharmaticTherapyDto";
+import MedicalFacilitiesPreventiveMeasuresDto from "./bonds/MedicalFacilitiesPreventiveMeasuresDto";
+export default class MedicalFacilitiesDto {
+    id: number;
+    facilityId: number;
+    name: string | null;
+    facilityCode: string | null;
+    facilityTypeCode: number;
+    character: string | null;
+    characterSecondary: string | null;
+    ico: number;
+    pcz: number;
+    pcdp: number;
+    region: string | null; 
+    regionCode: string | null; 
+    district: string | null; 
+    districtCode: string | null; 
+    administrativeDistrict: string | null; 
+    municipality: string | null; 
+    zip: string | null; 
+    street: string | null; 
+    buildingNumber: string | null; 
+    email: string | null;  
+    telephone: string | null;  
+    fax: string | null;  
+    website: string | null;  
+    providerType: string | null;  
+    providerName: string | null;  
+    careField: string | null;  
+    careForm: string | null;  
+    careType: string | null;  
+    representative: string | null;  
+    gps: string | null;  
+    nonpharmaticTherapy: MedicalFacilitiesNonpharmaticTherapyDto[];
+    preventiveMeasures: MedicalFacilitiesPreventiveMeasuresDto[];
+}

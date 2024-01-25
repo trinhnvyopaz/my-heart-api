@@ -1,0 +1,87 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>..\Ecosystem.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet>..\Ecosystem.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="ClientApp\backend\entities\informationModel.ts" />
+    <None Remove="ClientApp\backend\entities\medicineModel.ts" />
+    <None Remove="ClientApp\backend\entities\messageModel.ts" />
+    <None Remove="ClientApp\backend\entities\questionModel.ts" />
+    <None Remove="ClientApp\backend\entities\symptomModel.ts" />
+    <None Remove="ClientApp\backend\entities\userModel.ts" />
+    <None Remove="ClientApp\backend\store\modules\breadcrumbModule.ts" />
+    <None Remove="ClientApp\backend\store\modules\persistance.ts" />
+    <None Remove="ClientApp\backend\store\store.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.1" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ClientApp\css\_site.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\backend\entities\informationModel.ts" />
+    <TypeScriptCompile Include="ClientApp\backend\entities\medicineModel.ts" />
+    <TypeScriptCompile Include="ClientApp\backend\entities\messageModel.ts" />
+    <TypeScriptCompile Include="ClientApp\backend\entities\questionModel.ts" />
+    <TypeScriptCompile Include="ClientApp\backend\entities\symptomModel.ts" />
+    <TypeScriptCompile Include="ClientApp\backend\entities\userModel.ts" />
+    <TypeScriptCompile Include="ClientApp\backend\store\modules\breadcrumbModule.ts" />
+    <TypeScriptCompile Include="ClientApp\backend\store\modules\persistance.ts" />
+    <TypeScriptCompile Include="ClientApp\backend\store\store.ts" />
+  </ItemGroup>
+  
+  <Target Name="DevRun" BeforeTargets="Build">
+    <Message Importance="high" Text="Performing first-run Webpack build..." />   
+    <Exec Command="npm run dev" />    
+  </Target>
+  
+  <Target Name="DevRun" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
+    <Message Importance="high" Text="Performing first-run Webpack build..." />
+    <Exec Command="npm run dev" />
+  </Target>
+
+  <Target Name="ProdRun" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec Command="npm install" />    
+    <Exec Command="npm run prod" />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="wwwroot\dist\**" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>
